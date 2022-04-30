@@ -26,6 +26,7 @@ const Login = ({setToken,onSubmit}) => {
                 password
             });
             setToken(token);
+            window.history.pushState({},'','/dashboard');
         }
     }
     return(

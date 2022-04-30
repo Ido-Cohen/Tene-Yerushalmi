@@ -22,7 +22,7 @@ const App = () => {
         <div className="wrapper">
             <h1>שלום רב {user}</h1>
             <h1>טנא ירושלמי</h1>
-            <Route path="/">
+            <Route path="/dashboard">
                 <Dashboard/>
             </Route>
             <Route path="/preferences">
