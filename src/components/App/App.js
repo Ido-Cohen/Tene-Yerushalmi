@@ -1,34 +1,30 @@
-import React, {useState} from 'react';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import './App.css';
-import Dashboard from '../Dashboard/Dashboard';
-import Preferences from '../Preferences/Preferences';
-import Route from "../Route";
-import Login from "../Login/Login";
-import useToken from "./useToken";
+import Dashboard from "../Dashboard/Dashboard";
+import Navbar from "../layout/Navbar";
+import MessageDetails from "../Messages/MessageDetails";
+import SignIn from "../Auth/SignIn";
+import SignUp from "../Auth/SignUp";
+import CreateMessage from "../Messages/CreateMessage";
+import Settings from "../Settings/Settings";
 
 
-let user = '';
 const App = () => {
-
-    const onLoginUpdate=(term) =>{
-        console.log(term);
-       user = term;
-    }
-    const { token, setToken } = useToken();
-    if(!token) {
-        return <Login setToken={setToken} onSubmit={onLoginUpdate}/>
-    }
     return (
-        <div className="wrapper">
-            <h1>שלום רב {user}</h1>
-            <h1>טנא ירושלמי</h1>
-            <Route path="/dashboard">
-                <Dashboard/>
-            </Route>
-            <Route path="/preferences">
-                <Preferences/>
-            </Route>
-        </div>
+        <Router>
+            <div className="App">
+                <Navbar/>
+                <Routes>
+                    <Route exact path={"/"} element={<Dashboard/>} />
+                    <Route path={"/message/:id"} element={<MessageDetails/>} />
+                    <Route path={"/signin"} element={<SignIn/>} />
+                    <Route path={"/signup"} element={<SignUp/>} />
+                    <Route path={"/create"} element={<CreateMessage/>}/>
+                    <Route path={"/settings"} element={<Settings/>}/>
+                </Routes>
+            </div>
+        </Router>
+
     );
 };
 
