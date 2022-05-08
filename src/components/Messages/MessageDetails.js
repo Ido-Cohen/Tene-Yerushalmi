@@ -40,6 +40,7 @@ const MessageDetails = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    console.log(state);
     const id = ownProps.router.params.id
     const messages = state.firestore.data.messages;
     const message = messages ? messages[id] : null;

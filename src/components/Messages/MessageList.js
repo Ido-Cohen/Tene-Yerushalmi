@@ -12,7 +12,7 @@ const MessageList = ({messages}) => {
                         <MessageSummary message={message}/>
                     </Link>
                 );
-            })};
+            })}
         </div>
     );
 }

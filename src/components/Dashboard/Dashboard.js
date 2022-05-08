@@ -31,7 +31,7 @@ const mapStateToProps = (state) => {
   return{
       // messages: state.message.messages
       messages: state.firestore.ordered.messages,
-      auth: state.firebase.auth
+      auth: state.firebase.auth,
   }
 }
 export default compose(connect(mapStateToProps),firestoreConnect([
