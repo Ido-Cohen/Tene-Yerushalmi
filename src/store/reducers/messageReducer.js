@@ -13,6 +13,9 @@ const messageReducer = (state = initState, action) => {
         case 'CREATE_PROJECT_ERROR':
             console.log("create project error",action.err);
             return state;
+        case 'DELETE_MSG':
+            console.log("deleting message")
+            return state;
         default:
             return state;
     }

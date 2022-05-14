@@ -1,16 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from "react-redux";
 import {firestoreConnect} from "react-redux-firebase";
 import {compose} from "redux";
 import withRouter from './withRouter';
-import {Navigate} from "react-router";
+import {Navigate, useNavigate} from "react-router";
 import moment from "moment";
+import {deleteMessage} from "../../store/actions/messageActions";
 
 const MessageDetails = (props) => {
+    console.log(props);
     const {message, auth} = props;
+    const navigate = useNavigate();
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }
+    const handleDelete = (e, id, deleteMessage) => {
+        e.preventDefault()
+        deleteMessage(id)
+        console.log(id)
+        navigate('/');
+    }
+
     if (message) {
         return (
             <div className={"container section message-details"}>
@@ -22,6 +32,11 @@ const MessageDetails = (props) => {
                     <div className={"card-action gret lighten-4 grey-text"}>
                         <div>Posted by {message.authorFirstName} {message.authorLastName}</div>
                         <div>{moment(message.createdAt.toDate()).calendar()}</div>
+                    </div>
+                    <div className="card-action">
+                        <a onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
+                            <i className="medium material-icons">delete</i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -49,9 +64,14 @@ const mapStateToProps = (state, ownProps) => {
         auth: state.firebase.auth
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteMessage: (message) => dispatch(deleteMessage(message))
+    }
+}
 
 export default compose(withRouter,
-    connect(mapStateToProps), firestoreConnect([
+    connect(mapStateToProps, mapDispatchToProps), firestoreConnect([
         {collection: 'messages'}
     ])
 )(MessageDetails);

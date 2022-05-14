@@ -8,9 +8,6 @@ const Notifications = (props) => {
                     <div className={'card-title'}> Notifications</div>
                     <ul className={'notifications'}>
                         <li>Notifications</li>
-                        <li>Notifications</li>
-                        <li>Notifications</li>
-                        <li>Notifications</li>
                     </ul>
                 </div>
             </div>

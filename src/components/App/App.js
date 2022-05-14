@@ -7,7 +7,6 @@ import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
 import CreateMessage from "../Messages/CreateMessage";
 import Settings from "../Settings/Settings";
-import M from  'materialize-css/dist/js/materialize.min.js';
 
 
 
