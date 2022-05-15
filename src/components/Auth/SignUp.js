@@ -1,78 +1,109 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {Navigate} from "react-router";
 import {connect} from "react-redux";
 import {signUp} from "../../store/actions/authActions";
+import {AddressAutofill} from '@mapbox/search-js-react';
+import {Popper} from "@mui/material";
 
-class SignUp extends Component {
-    state = {
-        email:'',
-        password:'',
-        phoneNumber:'',
-        firstName:'',
-        lastName:'',
-        address:''
-
-    };
-
-    handleChange = (e) => {
-        this.setState({
+const SignUp = (props) => {
+    const {auth, authError} = props;
+    const [state, setState] = useState({
+        email: '',
+        password: '',
+        phoneNumber: '',
+        firstName: '',
+        lastName: '',
+        address: ''
+    });
+    const handleChange = (e) => {
+        setState(prevState => ({
+            ...prevState,
             [e.target.id]: e.target.value
-        })
+        }));
     }
-    handleSubmit = (e) => {
+    const handleSubmit = (e, signUp) => {
         e.preventDefault();
-        console.log(this.state);
-        this.props.signUp(this.state);
+        console.log(state);
+        signUp(state);
     }
-    render() {
-        const {auth,authError} = this.props;
-        if (auth.uid){
-            return <Navigate replace to={'/'}/>
-        }
-        return (
-            <div className={"container"}>
-                <form className={"white"} onSubmit={this.handleSubmit}>
-                    <h5 className={"grey-text text-darken-3"}>Sign Up</h5>
-                    <div className={"input-field"}>
-                        <label htmlFor={"email"}>Email</label>
-                        <input type={"email"} id={"email"} onChange={this.handleChange}/>
-                    </div>
-                    <div className={"input-field"}>
-                        <label htmlFor={"password"}>Password</label>
-                        <input type={"password"} id={"password"} onChange={this.handleChange}/>
-                    </div>
-                    <div className={"input-field"}>
-                        <label htmlFor={"firstName"}>First Name</label>
-                        <input type={"text"} id={"firstName"} onChange={this.handleChange}/>
-                    </div>
-                    <div className={"input-field"}>
-                        <label htmlFor={"lastName"}>Last Name</label>
-                        <input type={"text"} id={"lastName"} onChange={this.handleChange}/>
-                    </div>
-                    <div className={"input-field"}>
-                        <label htmlFor={"lastName"}>Address</label>
-                        <input type={"text"} id={"lastName"} onChange={this.handleChange}/>
-                    </div>
-                    <div className={"input-field"}>
-                        <button className={"btn pink lighten-1 z-depth-0"}>Sign Up</button>
-                    </div>
-                    <div className={"red-text center"}>
-                        {authError ? <p>{authError}</p> :null}
-                    </div>
-                </form>
-            </div>
-        );
+    const handleSelect = (e) => {
+        e.preventDefault();
     }
+    if (auth.uid) {
+        return <Navigate replace to={'/'}/>
+    }
+    const PopperMy = function (props) {
+        return (<Popper {...props} style={{ width: 250 }} placement='bottom-start' />)
+    }
+    return (
+        <div className={"container"}>
+            <form className={"white"} onSubmit={(e) => {
+                handleSubmit(e, props.signUp)
+            }}>
+                <h5 className={"grey-text text-darken-3"}>Sign Up</h5>
+                <div className={"input-field"}>
+                    <label htmlFor={"email"}>Email</label>
+                    <input type={"email"} id={"email"} onChange={(e) => {
+                        handleChange(e)
+                    }}/>
+                </div>
+                <div className={"input-field"}>
+                    <label htmlFor={"password"}>Password</label>
+                    <input type={"password"} id={"password"} onChange={(e) => {
+                        handleChange(e)
+                    }}/>
+                </div>
+                <div className={"input-field"}>
+                    <label htmlFor={"firstName"}>First Name</label>
+                    <input type={"text"} id={"firstName"} onChange={(e) => {
+                        handleChange(e)
+                    }}/>
+                </div>
+                <div className={"input-field"}>
+                    <label htmlFor={"lastName"}>Last Name</label>
+                    <input type={"text"} id={"lastName"} onChange={(e) => {
+                        handleChange(e)
+                    }}/>
+                </div>
+                {/*<input type={"text"} id={"address"} onChange={(e) => {*/}
+                {/*    handleChange(e)*/}
+                {/*}}/>*/}
+                <div className={"input-field"} style={{ width: 250 }}>
+
+                    <AddressAutofill
+                        accessToken="pk.eyJ1IjoiZWxhZGJuIiwiYSI6ImNsMzdlMmQxZDFhYTQzZ3FzZTF1dWdnMjUifQ.zv-ZeXF6VEX2nZHnDAxmaQ">
+                        <input id={"address"}
+                               name="address" placeholder="Address" type="text" value={state.address}
+                               autoComplete="address-level2" onChange={(e) => {
+                            handleChange(e)
+                        }}
+                        />
+
+                    </AddressAutofill>
+
+                </div>
+
+
+                <div className={"input-field"}>
+                    <button className={"btn pink lighten-1 z-depth-0"}>Sign Up</button>
+                </div>
+                <div className={"red-text center"}>
+                    {authError ? <p>{authError}</p> : null}
+                </div>
+            </form>
+        </div>
+    );
+
 }
 const mapStateToProps = (state) => {
-  return {
-      auth : state.firebase.auth,
-      authError: state.auth.authError
-  }
+    return {
+        auth: state.firebase.auth,
+        authError: state.auth.authError
+    }
 }
 const mapDispatchToProps = (dispatch) => {
-  return {
-      signUp: (newUser) => dispatch(signUp(newUser))
-  }
+    return {
+        signUp: (newUser) => dispatch(signUp(newUser))
+    }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

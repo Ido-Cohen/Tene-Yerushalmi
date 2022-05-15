@@ -7,7 +7,6 @@ const MapDashboard = () => {
     const anchorHover = (e) => {
         setState({lat: e.anchor[0], lin: e.anchor[1]});
     }
-    console.log("heyyyyyyyy");
     return (
         <div className={"container center"}>
             <Map height={300} defaultCenter={[31.771959, 35.217018]} defaultZoom={7}>
