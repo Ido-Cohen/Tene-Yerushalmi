@@ -20,6 +20,9 @@ const SignInLinks = (props) => {
                     <NavLink to={'/settings'}
                              className={"btn btn-floating pink lighten-1"}>{props.profile.initials}</NavLink>
                 </li>
+                <li>
+                    <NavLink to={'/maps'}>Show Map</NavLink>
+                </li>
 
             </ul>
             <ul id="slide-out" className="sidenav">

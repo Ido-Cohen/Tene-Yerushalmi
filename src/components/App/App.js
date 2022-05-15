@@ -7,6 +7,7 @@ import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
 import CreateMessage from "../Messages/CreateMessage";
 import Settings from "../Settings/Settings";
+import MapDashboard from "../Maps/mapDashboard";
 
 
 
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path={"/signup"} element={<SignUp/>} />
                     <Route path={"/create"} element={<CreateMessage/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
+                    <Route path={"/maps"} element={<MapDashboard/>}/>
                 </Routes>
             </div>
         </Router>

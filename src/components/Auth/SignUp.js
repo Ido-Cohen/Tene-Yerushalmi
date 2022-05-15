@@ -9,7 +9,8 @@ class SignUp extends Component {
         password:'',
         phoneNumber:'',
         firstName:'',
-        lastName:''
+        lastName:'',
+        address:''
 
     };
 
@@ -46,6 +47,10 @@ class SignUp extends Component {
                     </div>
                     <div className={"input-field"}>
                         <label htmlFor={"lastName"}>Last Name</label>
+                        <input type={"text"} id={"lastName"} onChange={this.handleChange}/>
+                    </div>
+                    <div className={"input-field"}>
+                        <label htmlFor={"lastName"}>Address</label>
                         <input type={"text"} id={"lastName"} onChange={this.handleChange}/>
                     </div>
                     <div className={"input-field"}>
