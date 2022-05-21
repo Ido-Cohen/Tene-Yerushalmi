@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App/App";
 import './index.css';
-import { legacy_createStore as createStore} from 'redux'
-import { applyMiddleware, compose } from "redux";
+import {legacy_createStore as createStore} from 'redux'
+import {applyMiddleware, compose} from "redux";
 import rootReducer from "./store/reducers/rootReducer";
 import {Provider, useSelector} from "react-redux";
 import thunk from "redux-thunk";
@@ -20,11 +20,10 @@ import registerServiceWorker from './registerServiceWorker';
 const store = createStore(
     rootReducer,
     compose(
-        applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+        applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
         reduxFirestore(firebase, fbConfig)
     )
 );
-
 
 
 const rrfConfig = {
@@ -42,7 +41,7 @@ const rrfProps = {
     sessions: 'sessions'
 }
 
-function AuthIsLoaded({ children }) {
+function AuthIsLoaded({children}) {
     const auth = useSelector(state => state.firebase.auth)
     if (!isLoaded(auth)) return (<div>
         <div className="preloader-wrapper big active">
@@ -66,11 +65,11 @@ function AuthIsLoaded({ children }) {
 ReactDOM.render(
     <Provider store={store}>
 
-            <ReactReduxFirebaseProvider {...rrfProps}>
-                <AuthIsLoaded>
-                    <App />
-                </AuthIsLoaded>
-            </ReactReduxFirebaseProvider>
+        <ReactReduxFirebaseProvider {...rrfProps}>
+            <AuthIsLoaded>
+                <App/>
+            </AuthIsLoaded>
+        </ReactReduxFirebaseProvider>
 
     </Provider>,
     document.getElementById("root")

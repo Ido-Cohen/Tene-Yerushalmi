@@ -2,14 +2,7 @@ import React, {Component, useState} from 'react';
 import {Navigate} from "react-router";
 import {connect} from "react-redux";
 import {signUp} from "../../store/actions/authActions";
-import {AddressAutofill} from '@mapbox/search-js-react';
-import {
-    MapContainer,
-    TileLayer,
-    useMap,
-} from 'https://cdn.esm.sh/react-leaflet'
-import {Popper} from "@mui/material";
-// import Search from "react-leaflet-search";
+
 
 const SignUp = (props) => {
     const {auth, authError} = props;
@@ -72,32 +65,12 @@ const SignUp = (props) => {
                 {/*}}/>*/}
                 <div className={"input-field"}>
 
-                    {/*<Search*/}
-                    {/*    className="search"*/}
-                    {/*    onChange={(info) => {*/}
-                    {/*        console.log("FROM onChange: ", info);*/}
-                    {/*    }}*/}
-
-
-
-                    {/*    inputPlaceholder="Custom placeholder"*/}
-                    {/*    showMarker={false}*/}
-                    {/*    zoom={7}*/}
-                    {/*    closeResultsOnClick={true}*/}
-                    {/*    openSearchOnLoad={false}>*/}
-                    {/*    </Search>*/}
-                    {/*</MapContainer>*/}
-
                         <input id={"address"}
                                name="address" placeholder="Address" type="text" value={state.address}
                                autoComplete="address-level2" onChange={(e) => {
                             handleChange(e)
                         }}
                         />
-
-
-
-
                 </div>
 
 

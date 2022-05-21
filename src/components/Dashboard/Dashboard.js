@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import Notifications from "./Notifications"
 import MessageList from "../Messages/MessageList";
 import {connect} from "react-redux";
 import {firestoreConnect} from "react-redux-firebase";
@@ -24,7 +23,6 @@ class Dashboard extends Component{
 
 const mapStateToProps = (state) => {
   return{
-      // messages: state.message.messages
       messages: state.firestore.ordered.messages,
       auth: state.firebase.auth,
   }
