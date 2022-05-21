@@ -24,7 +24,6 @@ const columns = [
 
 const Settings = (props) => {
     const {auth,profile,users} = props;
-    console.log(users);
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }

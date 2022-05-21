@@ -8,7 +8,7 @@ import SignUp from "../Auth/SignUp";
 import CreateMessage from "../Messages/CreateMessage";
 import Settings from "../Settings/Settings";
 import MapDashboard from "../Maps/mapDashboard";
-
+import ContactsList from  "../Contacts/contactList";
 
 
 const App = () => {
@@ -24,6 +24,7 @@ const App = () => {
                     <Route path={"/create"} element={<CreateMessage/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
                     <Route path={"/maps"} element={<MapDashboard/>}/>
+                    <Route path={"/contacts"} element={<ContactsList/>}/>
                 </Routes>
             </div>
         </Router>

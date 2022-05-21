@@ -8,15 +8,16 @@ const SignOutLinks = () => {
 
             <ul className={"right hide-on-med-and-down"}>
                 <li>
-                    <NavLink to={'/signup'}>Register</NavLink>
+                    <NavLink to={'/signup'}>הרשמה</NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/signin'}>Login</NavLink>
+                    <NavLink to={'/signin'}>התחברות</NavLink>
                 </li>
             </ul>
             <ul id="slide-out" className="sidenav">
-                <li><NavLink to={'/signup'}>Register</NavLink></li>
-                <li><NavLink to={'/signin'}>Login</NavLink></li>
+                <li><NavLink to={'/signup'}>הרשמה</NavLink></li>
+                <li><NavLink to={'/signin'}>התחברות</NavLink></li>
+
             </ul>
         </div>
     );

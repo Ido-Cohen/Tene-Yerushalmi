@@ -8,30 +8,48 @@ const SignInLinks = (props) => {
     return (
         <div className={'sign-in-links'}>
 
-            <ul className={"right hide-on-med-and-down"}>
-                <li>
-                    <NavLink to={'/create'}>New Message</NavLink>
-                </li>
-                <li>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a onClick={props.signOut}>Log out</a>
-                </li>
+            <ul className={"left hide-on-med-and-down"}>
                 <li>
                     <NavLink to={'/settings'}
                              className={"btn btn-floating pink lighten-1"}>{props.profile.initials}</NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/maps'}>Show Map</NavLink>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a onClick={props.signOut}>התנתקות</a>
                 </li>
+
+                <li>
+                    <NavLink to={'/maps'}>מפה</NavLink>
+                </li>
+                <li>
+                    <NavLink to={'/contacts'}>אנשי קשר</NavLink>
+                </li>
+                <li>
+                    <NavLink to={'/create'}>הודעה חדשה</NavLink>
+                </li>
+
 
             </ul>
             <ul id="slide-out" className="sidenav">
-                <li><NavLink to={'/create'}>New Message</NavLink></li>
-                <li><a onClick={props.signOut}>Log out</a></li>
+                <li>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a onClick={props.signOut}>התנתקות</a>
+                </li>
+
+                <li>
+                    <NavLink to={'/maps'}>מפה</NavLink>
+                </li>
+                <li>
+                    <NavLink to={'/contacts'}>אנשי קשר</NavLink>
+                </li>
+                <li>
+                    <NavLink to={'/create'}>הודעה חדשה</NavLink>
+                </li>
                 <li>
                     <NavLink to={'/settings'}
-                             >{props.profile.firstName} Settings</NavLink>
+                             >הגדרות משתמשים</NavLink>
                 </li>
+
             </ul>
         </div>
 

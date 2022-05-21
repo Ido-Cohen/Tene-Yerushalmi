@@ -18,7 +18,6 @@ const CreateMessage = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(state);
         createMessage(state);
         navigate('/');
     }

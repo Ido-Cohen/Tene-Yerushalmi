@@ -8,7 +8,6 @@ import moment from "moment";
 import {deleteMessage} from "../../store/actions/messageActions";
 
 const MessageDetails = (props) => {
-    console.log(props);
     const {message, auth} = props;
     const navigate = useNavigate();
     if (!auth.uid) {
@@ -17,7 +16,6 @@ const MessageDetails = (props) => {
     const handleDelete = (e, id, deleteMessage) => {
         e.preventDefault()
         deleteMessage(id)
-        console.log(id)
         navigate('/');
     }
 
@@ -55,7 +53,6 @@ const MessageDetails = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state);
     const id = ownProps.router.params.id
     const messages = state.firestore.data.messages;
     const message = messages ? messages[id] : null;

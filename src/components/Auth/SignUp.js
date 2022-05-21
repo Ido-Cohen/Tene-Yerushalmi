@@ -3,7 +3,13 @@ import {Navigate} from "react-router";
 import {connect} from "react-redux";
 import {signUp} from "../../store/actions/authActions";
 import {AddressAutofill} from '@mapbox/search-js-react';
+import {
+    MapContainer,
+    TileLayer,
+    useMap,
+} from 'https://cdn.esm.sh/react-leaflet'
 import {Popper} from "@mui/material";
+// import Search from "react-leaflet-search";
 
 const SignUp = (props) => {
     const {auth, authError} = props;
@@ -23,7 +29,6 @@ const SignUp = (props) => {
     }
     const handleSubmit = (e, signUp) => {
         e.preventDefault();
-        console.log(state);
         signUp(state);
     }
     const handleSelect = (e) => {
@@ -31,9 +36,6 @@ const SignUp = (props) => {
     }
     if (auth.uid) {
         return <Navigate replace to={'/'}/>
-    }
-    const PopperMy = function (props) {
-        return (<Popper {...props} style={{ width: 250 }} placement='bottom-start' />)
     }
     return (
         <div className={"container"}>
@@ -68,10 +70,24 @@ const SignUp = (props) => {
                 {/*<input type={"text"} id={"address"} onChange={(e) => {*/}
                 {/*    handleChange(e)*/}
                 {/*}}/>*/}
-                <div className={"input-field"} style={{ width: 250 }}>
+                <div className={"input-field"}>
 
-                    <AddressAutofill
-                        accessToken="pk.eyJ1IjoiZWxhZGJuIiwiYSI6ImNsMzdlMmQxZDFhYTQzZ3FzZTF1dWdnMjUifQ.zv-ZeXF6VEX2nZHnDAxmaQ">
+                    {/*<Search*/}
+                    {/*    className="search"*/}
+                    {/*    onChange={(info) => {*/}
+                    {/*        console.log("FROM onChange: ", info);*/}
+                    {/*    }}*/}
+
+
+
+                    {/*    inputPlaceholder="Custom placeholder"*/}
+                    {/*    showMarker={false}*/}
+                    {/*    zoom={7}*/}
+                    {/*    closeResultsOnClick={true}*/}
+                    {/*    openSearchOnLoad={false}>*/}
+                    {/*    </Search>*/}
+                    {/*</MapContainer>*/}
+
                         <input id={"address"}
                                name="address" placeholder="Address" type="text" value={state.address}
                                autoComplete="address-level2" onChange={(e) => {
@@ -79,7 +95,8 @@ const SignUp = (props) => {
                         }}
                         />
 
-                    </AddressAutofill>
+
+
 
                 </div>
 
@@ -92,6 +109,7 @@ const SignUp = (props) => {
                 </div>
             </form>
         </div>
+
     );
 
 }

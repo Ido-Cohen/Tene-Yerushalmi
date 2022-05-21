@@ -17,9 +17,9 @@ const Navbar = (props) => {
 
       <nav className={"nav-wrapper orange darken-3"}>
           <div className={"container"}>
-              <a href="" data-target="slide-out" className="sidenav-trigger show-on-medium-and-down"><i
+              <a href="" data-target="slide-out" className="sidenav-trigger show-on-medium-and-down right"><i
                   className="material-icons">menu</i></a>
-              <Link to={"/"} className={"brand-logo"}>Tene JLM</Link>
+              <Link to={"/"} className={"brand-logo center"}>טנא ירושלמי</Link>
               {links}
           </div>
       </nav>
