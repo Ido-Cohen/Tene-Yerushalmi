@@ -19,7 +19,7 @@ const Navbar = (props) => {
           <div className={"container"}>
               <a href="" data-target="slide-out" className="sidenav-trigger show-on-medium-and-down right"><i
                   className="material-icons">menu</i></a>
-              <Link to={"/"} className={"brand-logo center"}>טנא ירושלמי</Link>
+              <Link to={"/"} className={"brand-logo center"}><img src={"/../../../img/tenelogo.png"} style={{height: '56px', padding: '0px', width: 'auto'}}/></Link>
               {links}
           </div>
       </nav>

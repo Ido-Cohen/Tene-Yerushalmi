@@ -4,7 +4,8 @@ html{
 body{
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    /*font-family: sans-serif;*/
+    font-family: 'Assistant', serif;
     background-size: 100%;
     background: #fcb259 url("../public/img/tenebg.jpg") no-repeat bottom;
     min-height: 100%;
