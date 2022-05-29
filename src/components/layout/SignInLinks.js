@@ -27,6 +27,9 @@ const SignInLinks = (props) => {
                 <li>
                     <NavLink to={'/create'}>הודעה חדשה</NavLink>
                 </li>
+                <li>
+                    <NavLink to={'/add'}>הוספת קבוצה</NavLink>
+                </li>
 
 
             </ul>
