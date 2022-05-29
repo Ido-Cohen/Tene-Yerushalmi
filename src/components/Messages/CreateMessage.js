@@ -27,18 +27,18 @@ const CreateMessage = (props) => {
     }
     return (
         <div className={"container"}>
-            <form className={"white"} onSubmit={handleSubmit}>
-                <h5 className={"grey-text text-darken-3"}>Send Message</h5>
+            <form className={"white right-align"} onSubmit={handleSubmit}>
+                <h5 className={"grey-text text-darken-3"}>שליחת הודעה</h5>
                 <div className={"input-field"}>
-                    <label htmlFor={"title"}>Title</label>
+                    <label htmlFor={"title"} >כותרת</label>
                     <input type={"text"} id={"title"} onChange={handleChange}/>
                 </div>
                 <div className={"input-field"}>
-                    <label htmlFor={"content"}>Message Content</label>
+                    <label htmlFor={"content"}>תוכן ההודעה</label>
                     <textarea className={"materialize-textarea"} id={"content"} onChange={handleChange}/>
                 </div>
                 <div className={"input-field"}>
-                    <button className={"btn pink lighten-1 z-depth-0"}>Send Message</button>
+                    <button className={"btn pink lighten-1 z-depth-0"}>שליחת הודעה</button>
                 </div>
             </form>
         </div>
