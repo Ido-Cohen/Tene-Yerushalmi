@@ -15,9 +15,7 @@ const AddGroup = () => {
         }
 
         setSelectedFile(event.target.files[0]);
-        // console.log(event.target.value);
         setIsFilePicked(true);
-        console.log(selectedFile);
     };
 
     const handleSubmission = () => {
@@ -25,13 +23,14 @@ const AddGroup = () => {
             alert("please select file");
             return;
         }
-        console.log(selectedFile);
+        // console.log(selectedFile);
         var reader = new FileReader();
         reader.readAsText(selectedFile);
         let fileText;
         reader.onload = function () {
             fileText = reader.result;
-            fileText = fileText.substring(fileText.indexOf("Name"), fileText.indexOf(",,,,,,,,,,,,,,,,"));
+            fileText = fileText.substring(fileText.indexOf("Name"));
+            fileText = fileText.substring(0, fileText.indexOf(",,,,,,,,,,,,,,,,"));
             fileText = fileText.replace("Name", "firstName");
             fileText = fileText.replace("משפחה", "lastName");
             fileText = fileText.replace("מין", "gen");
