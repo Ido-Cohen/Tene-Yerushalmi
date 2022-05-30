@@ -15,7 +15,7 @@ const SignInLinks = (props) => {
                 </li>
                 <li>
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a onClick={props.signOut}>התנתקות</a>
+                    <NavLink to={'/signin'} onClick={props.signOut}>התנתקות</NavLink>
                 </li>
 
                 <li>
@@ -36,7 +36,7 @@ const SignInLinks = (props) => {
             <ul id="slide-out" className="sidenav">
                 <li>
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a onClick={props.signOut}>התנתקות</a>
+                    <NavLink to={'/signin'} onClick={props.signOut}>התנתקות</NavLink>
                 </li>
 
                 <li>
@@ -52,15 +52,19 @@ const SignInLinks = (props) => {
                     <NavLink to={'/settings'}
                              >הגדרות משתמשים</NavLink>
                 </li>
+                <li>
+                    <NavLink to={'/add'}
+                    >הוספת קבוצה</NavLink>
+                </li>
 
             </ul>
         </div>
 
     );
 }
-const mapDispatchToProps = (disptach) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        signOut: () => disptach(signOut())
+        signOut: () => dispatch(signOut())
     }
 }
 export default connect(null, mapDispatchToProps)(SignInLinks);

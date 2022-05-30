@@ -1,4 +1,4 @@
-
+import getAuth from '@firebase/auth';
 export const signIn = (credentials) => {
   return (dispatch,getState,{getFirebase}) => {
       const firebase = getFirebase();
@@ -30,12 +30,11 @@ export const signUp = (newUser) => {
           newUser.email,
           newUser.password
       ).then((resp) => {
-          return firestore.collection('users').doc(resp.user.uid).set({
-              email:newUser.email,
-              firstName: newUser.firstName,
-              lastName: newUser.lastName,
+          console.log(resp.user.uid);
+         return firestore.collection('users').doc(resp.user.uid).set({
+              ...newUser,
               initials:newUser.firstName[0] + newUser.lastName[0]
-          })
+          });
       }).then(() => {
           dispatch({type: 'SIGNUP_SUCCESS'})
       }).catch(err => {
