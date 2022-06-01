@@ -99,9 +99,17 @@ const AddGroup = (props) => {
                     isNewUser:true,
                     gen:student.gen
                 });
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(studentDetails),
+                };
                 console.log(studentDetails);
                 // sendEmail();
-                signUp(studentDetails);
+                // signUp(studentDetails);
+                fetch("/api",requestOptions)
+                    .then((res) => res.json())
+                    .then((data) => console.log(data.message));
             })
             console.log(json);
         }
