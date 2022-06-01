@@ -8,7 +8,7 @@ const SignInLinks = (props) => {
     return (
         <div className={'sign-in-links'}>
 
-            <ul className={"left hide-on-med-and-down"}>
+            <ul className={"right hide-on-med-and-down"}>
                 <li>
                     <NavLink to={'/settings'}
                              className={"btn btn-floating pink lighten-1"}>{props.profile.initials}</NavLink>
@@ -30,6 +30,9 @@ const SignInLinks = (props) => {
                 <li>
                     <NavLink to={'/add'}>הוספת קבוצה</NavLink>
                 </li>
+                <li><NavLink to={'/signup'}>רישום יחיד</NavLink></li>
+
+
 
 
             </ul>
@@ -56,6 +59,8 @@ const SignInLinks = (props) => {
                     <NavLink to={'/add'}
                     >הוספת קבוצה</NavLink>
                 </li>
+                <li><NavLink to={'/signup'}>רישום יחיד</NavLink></li>
+
 
             </ul>
         </div>

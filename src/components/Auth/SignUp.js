@@ -27,7 +27,7 @@ const SignUp = (props) => {
     const handleSelect = (e) => {
         e.preventDefault();
     }
-    if (auth.uid) {
+    if (!auth.uid) {
         return <Navigate replace to={'/'}/>
     }
     return (
@@ -87,6 +87,7 @@ const SignUp = (props) => {
 
 }
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         auth: state.firebase.auth,
         authError: state.auth.authError

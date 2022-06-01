@@ -12,6 +12,8 @@ const AddGroup = (props) => {
     const form = useRef();
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
+    const [yearOfGraduate, setYearOfGraduate] = useState(null);
+
     let studentDetails = {
         email: '',
         password: '',
@@ -23,7 +25,6 @@ const AddGroup = (props) => {
         isNewUser:null,
         gen:''
     };
-    const [yearOfGraduate, setYearOfGraduate] = useState('');
     var regex = new RegExp("(.*?)\.(csv)$");
     const changeHandler = (event) => {
         if (!(regex.test(event.target.value.toLowerCase()))) {
@@ -41,6 +42,10 @@ const AddGroup = (props) => {
         e.preventDefault();
         if (!isFilePicked) {
             alert("please select file");
+            return;
+        }
+        if (yearOfGraduate === null){
+            alert("אין שם לקבוצה");
             return;
         }
         console.log(selectedFile);
@@ -97,7 +102,9 @@ const AddGroup = (props) => {
                     parentsAddress: student.parentsAddress,
                     workAt: student.workAt,
                     isNewUser:true,
-                    gen:student.gen
+                    gen:student.gen,
+                    isAdmin: false,
+                    yearOfGraduate: yearOfGraduate
                 });
                 const requestOptions = {
                     method: 'POST',
@@ -107,9 +114,9 @@ const AddGroup = (props) => {
                 console.log(studentDetails);
                 // sendEmail();
                 // signUp(studentDetails);
-                fetch("/api",requestOptions)
+                fetch("/createUsers",requestOptions)
                     .then((res) => res.json())
-                    .then((data) => console.log(data.message));
+                    .then((data) => console.log(data.email || data.message));
             })
             console.log(json);
         }
@@ -131,9 +138,9 @@ const AddGroup = (props) => {
                 <h5 className={"grey-text text-darken-3"}>הוספת קבוצה</h5>
                 <div className={"input-field"}>
                     <label htmlFor={"yearOfGraduate"}>שם קבוצה</label>
-                    <input type={"text"} id={"yearOfGraduate"} onChange={(e) => {
-                        setYearOfGraduate(e.target.value)
-                    }}/>
+                    <input type={"text"} pattern="[0-9]*" value={yearOfGraduate} id={"yearOfGraduate"} onChange={(e) => (e.target.validity.valid ?
+                        setYearOfGraduate(e.target.value) : e)
+                    }/>
                 </div>
                 <div className={"input-field"}>
                     <input type={"file"} name={"file"} accept={".csv"} onChange={changeHandler}/>
