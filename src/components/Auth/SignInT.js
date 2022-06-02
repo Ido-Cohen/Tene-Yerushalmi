@@ -13,13 +13,12 @@ export default function SignInT() {
         ```
       */}
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-md w-full space-y-8 white pt-5 rounded-lg">
+                <div className="max-w-md w-full space-y-8 white pt-5 rounded-lg ">
                     <div>
                         <img
                             className="mx-auto h-12 w-auto"
                             src={"/../../../img/tenelogo.png"}
                             alt="Workflow"
-
                         />
                         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">התחברות לאתר הבוגרים</h2>
                     </div>
@@ -36,13 +35,13 @@ export default function SignInT() {
                                     type="email"
                                     autoComplete="email"
                                     required
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder="Email address"
+                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm text-right"
+                                    placeholder="כתובת מייל"
                                 />
                             </div>
                             <div>
                                 <label htmlFor="password" className="sr-only">
-                                    Password
+                                    password
                                 </label>
                                 <input
                                     id="password"
@@ -50,13 +49,13 @@ export default function SignInT() {
                                     type="password"
                                     autoComplete="current-password"
                                     required
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder="Password"
+                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm text-right"
+                                    placeholder="סיסמה"
                                 />
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-end">
+                        <div className="flex items-center justify-end pt-5">
                             <div className="text-sm">
                                 <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 text-right">
                                    ?שכחת סיסמה
@@ -64,7 +63,7 @@ export default function SignInT() {
                             </div>
                         </div>
 
-                        <div>
+                        <div className={"pb-5"}>
                             <button
                                 type="submit"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-400 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
