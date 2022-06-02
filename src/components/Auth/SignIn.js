@@ -17,10 +17,9 @@ class SignIn extends Component {
         this.props.signIn(this.state);
     }
     render() {
-        const {authError,auth,userDetails} = this.props;
+        const {authError,auth,users} = this.props;
         if (auth.uid){
-            console.log(userDetails);
-            if(userDetails.isNewUser){
+            if(users && users[auth.uid].isNewUser){
                 return <Navigate replace to={'/reset-password/new-user'}/>
             }
             return <Navigate replace to={'/'}/>
@@ -53,7 +52,7 @@ const mapStateToProps = (state) => {
   return {
       authError: state.auth.authError,
       auth: state.firebase.auth,
-      userDetails: state.firestore.data.users[state.firebase.auth.uid]
+      users: state.firestore.data.users
   }
 }
 

@@ -7,9 +7,12 @@ import {Navigate} from "react-router";
 
 class Dashboard extends Component{
     render(){
-        const {messages,auth} = this.props;
+        const {messages,auth, users} = this.props;
         if (!auth.uid){
             return <Navigate replace to={'/signin'}/>
+        }
+        if (users && users[auth.uid].isNewUser){
+            return <Navigate replace to={'/reset-password/new-user'}/>;
         }
         return (
             <div className={"dashboard container"}>
@@ -25,6 +28,7 @@ const mapStateToProps = (state) => {
   return{
       messages: state.firestore.ordered.messages,
       auth: state.firebase.auth,
+      users: state.firestore.data.users
   }
 }
 export default compose(connect(mapStateToProps),firestoreConnect([
