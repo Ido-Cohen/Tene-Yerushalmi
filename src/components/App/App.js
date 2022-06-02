@@ -10,6 +10,7 @@ import Settings from "../Settings/Settings";
 import MapDashboard from "../Maps/mapDashboard";
 import ContactsList from  "../Contacts/contactList";
 import NewUserLandingPage from  "../Auth/NewUserLandingPage";
+import ResetPassword from "../Auth/ResetPassword";
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
                     <Route path={"/maps"} element={<MapDashboard/>}/>
                     <Route path={"/contacts"} element={<ContactsList/>}/>
                     <Route path={"/reset-password/new-user"} element={<NewUserLandingPage/>}/>
+                    <Route path={"/forgot-password"} element={<ResetPassword/>}/>
                 </Routes>
             </div>
         </Router>

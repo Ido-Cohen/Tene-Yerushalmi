@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {signIn} from "../../store/actions/authActions";
 import {Navigate} from "react-router";
+import {NavLink} from "react-router-dom";
 // import userDetails from "../Settings/userDetails";
 
 class SignIn extends Component {
@@ -41,6 +42,9 @@ class SignIn extends Component {
                         <div className={"red-text center"}>
                             {authError ? <p>{authError}</p> : null}
                         </div>
+                    </div>
+                    <div className={"orange-text center-align"}>
+                        <NavLink to={"/forgot-password"}>שכחתי סיסמא</NavLink>
                     </div>
                 </form>
             </div>
