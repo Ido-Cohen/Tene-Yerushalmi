@@ -20,12 +20,10 @@ const AddGroup = (props) => {
         phoneNumber: '',
         firstName: '',
         lastName: '',
-        parentsAddress: '',
         workAt: '',
-        isNewUser:null,
-        gen:''
+        isNewUser:true,
     };
-    var regex = new RegExp("(.*?)\.(csv)$");
+    let regex = new RegExp("(.*?)\.(csv)$");
     const changeHandler = (event) => {
         if (!(regex.test(event.target.value.toLowerCase()))) {
             event.target.value = '';
@@ -99,10 +97,8 @@ const AddGroup = (props) => {
                     phoneNumber: student.phoneNumber,
                     firstName: student.firstName,
                     lastName: student.lastName,
-                    parentsAddress: student.parentsAddress,
                     workAt: student.workAt,
                     isNewUser:true,
-                    gen:student.gen,
                     isAdmin: false,
                     yearOfGraduate: yearOfGraduate
                 });
