@@ -24,6 +24,8 @@
     "express": "^4.18.1",
     "firebase": "^9.7.0",
     "firebase-admin": "^10.2.0",
+    "flowbite": "^1.4.7",
+    "flowbite-react": "^0.0.25",
     "leaflet": "^1.8.0",
     "leaflet-geosearch": "^3.6.0",
     "lodash": "^4.17.21",
