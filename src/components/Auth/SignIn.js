@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {signIn} from "../../store/actions/authActions";
 import {Navigate} from "react-router";
+// import userDetails from "../Settings/userDetails";
 
 class SignIn extends Component {
     state = {email:'',password:''};
@@ -16,8 +17,12 @@ class SignIn extends Component {
         this.props.signIn(this.state);
     }
     render() {
-        const {authError,auth} = this.props;
+        const {authError,auth,userDetails} = this.props;
         if (auth.uid){
+            console.log(userDetails);
+            if(userDetails.isNewUser){
+                return <Navigate replace to={'/reset-password/new-user'}/>
+            }
             return <Navigate replace to={'/'}/>
         }
         return (
@@ -44,9 +49,11 @@ class SignIn extends Component {
     }
 }
 const mapStateToProps = (state) => {
+    // console.log(state.firestore.data.users[state.firebase.auth.uid]);
   return {
       authError: state.auth.authError,
-      auth: state.firebase.auth
+      auth: state.firebase.auth,
+      userDetails: state.firestore.data.users[state.firebase.auth.uid]
   }
 }
 

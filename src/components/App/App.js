@@ -9,6 +9,7 @@ import CreateMessage from "../Messages/CreateMessage";
 import Settings from "../Settings/Settings";
 import MapDashboard from "../Maps/mapDashboard";
 import ContactsList from  "../Contacts/contactList";
+import NewUserLandingPage from  "../Auth/NewUserLandingPage";
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
                     <Route path={"/settings"} element={<Settings/>}/>
                     <Route path={"/maps"} element={<MapDashboard/>}/>
                     <Route path={"/contacts"} element={<ContactsList/>}/>
+                    <Route path={"/reset-password/new-user"} element={<NewUserLandingPage/>}/>
                 </Routes>
             </div>
         </Router>
