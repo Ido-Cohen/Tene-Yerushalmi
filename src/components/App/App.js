@@ -10,7 +10,6 @@ import CreateMessage from "../Messages/CreateMessage";
 import Settings from "../Settings/Settings";
 import MapDashboard from "../Maps/mapDashboard";
 import ContactsList from  "../Contacts/contactList";
-import Nav from "../layout/example";
 
 
 const App = () => {

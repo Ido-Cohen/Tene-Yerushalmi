@@ -2,8 +2,9 @@ import React, {Component, useState} from 'react';
 import {Navigate} from "react-router";
 import {connect} from "react-redux";
 import {signUp} from "../../store/actions/authActions";
+import emailjs from "@emailjs/browser";
 
-
+let params;
 const SignUp = (props) => {
     const {auth, authError} = props;
     const [state, setState] = useState({
@@ -22,6 +23,13 @@ const SignUp = (props) => {
     }
     const handleSubmit = (e, signUp) => {
         e.preventDefault();
+        params = {
+            email: state.email,
+            name: state.firstName,
+            from_name: 'Tene',
+            password: state.password
+        }
+        sendEmail();
         signUp(state);
     }
     const handleSelect = (e) => {
@@ -30,6 +38,14 @@ const SignUp = (props) => {
     if (!auth.uid) {
         return <Navigate replace to={'/'}/>
     }
+    const sendEmail = (e) => {
+        emailjs.send('service_gjoy0f9', 'template_5shs7pl', params, 'egcBMN9brtXo-NsSr')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+    };
     return (
         <div className={"container"}>
             <form className={"white"} onSubmit={(e) => {

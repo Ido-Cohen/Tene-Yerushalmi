@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {signIn} from "../../store/actions/authActions";
 import {Navigate} from "react-router";
-
+//check
 class SignIn extends Component {
     state = {email:'',password:''};
 

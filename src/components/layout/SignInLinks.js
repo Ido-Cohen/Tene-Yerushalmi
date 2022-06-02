@@ -17,6 +17,9 @@ const SignInLinks = (props) => {
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <NavLink to={'/signin'} onClick={props.signOut}>התנתקות</NavLink>
                 </li>
+                <li>
+                    <NavLink to={'/signup'}>הוספת בוגר</NavLink>
+                </li>
 
                 <li>
                     <NavLink to={'/maps'}>מפה</NavLink>
@@ -40,6 +43,9 @@ const SignInLinks = (props) => {
                 <li>
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <NavLink to={'/signin'} onClick={props.signOut}>התנתקות</NavLink>
+                </li>
+                <li>
+                    <NavLink to={'/signup'}>הוספת בוגר</NavLink>
                 </li>
 
                 <li>
