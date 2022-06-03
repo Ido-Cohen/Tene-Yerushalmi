@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 
 const Dropdown = (props) => {
-    console.log(props)
     const {type,values,reference} = props;
     const [value, setValue] = useState('');
     const handleChange = (event) => {
