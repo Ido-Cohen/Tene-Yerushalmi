@@ -9,7 +9,7 @@ const AddGroupT  = (props) => {
                 <form>
                     <div className="mb-6">
                         <label htmlFor="name" className="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300 text-right">שם המחזור</label>
-                        <input type="text" id="number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-right" placeholder="לדוגמא: 2" required />
+                        <input type="text" id="number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-right" placeholder="לדוגמא: 3" required />
                     </div>
                     <div className="flex justify-center items-center w-full pt-5">
                         <label htmlFor="dropzone-file" className="flex flex-col justify-center items-center max-w-md w-full h-53 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
