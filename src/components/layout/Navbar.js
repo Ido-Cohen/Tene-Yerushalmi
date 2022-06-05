@@ -17,7 +17,7 @@ const Navbar = (props) => {
 
       <nav className={"nav-wrapper orange darken-3"}>
           <div className={"container"}>
-              <a href="" data-target="slide-out" className="sidenav-trigger show-on-medium-and-down left"><i
+              <a href="" data-target="slide-out" className="sidenav-trigger show-on-medium-and-down right"><i
                   className="material-icons">menu</i></a>
               <Link to={"/"} className={"brand-logo left"}><img src={"/../../../img/tenelogo.png"} style={{height: '56px', padding: '0px', width: 'auto'}}/></Link>
               {links}

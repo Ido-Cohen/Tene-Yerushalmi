@@ -10,6 +10,7 @@ import CreateMessage from "../Messages/CreateMessage";
 import Settings from "../Settings/Settings";
 import MapDashboard from "../Maps/mapDashboard";
 import ContactsList from  "../Contacts/contactList";
+import SignInT from "../Auth/SignInT";
 
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
                 <Routes>
                     <Route exact path={"/"} element={<Dashboard/>} />
                     <Route path={"/message/:id"} element={<MessageDetails/>} />
-                    <Route path={"/signin"} element={<SignIn/>} />
+                    <Route path={"/signin"} element={<SignInT/>} />
                     <Route path={"/signup"} element={<SignUp/>} />
                     <Route path={"/add"} element={<AddGroup/>} />
                     <Route path={"/create"} element={<CreateMessage/>}/>
