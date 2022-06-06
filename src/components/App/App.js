@@ -11,6 +11,7 @@ import Settings from "../Settings/Settings";
 import MapDashboard from "../Maps/mapDashboard";
 import ContactsList from  "../Contacts/contactList";
 import SignInT from "../Auth/SignInT";
+import SignUpT from "../Auth/SignUpT";
 
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
                     <Route exact path={"/"} element={<Dashboard/>} />
                     <Route path={"/message/:id"} element={<MessageDetails/>} />
                     <Route path={"/signin"} element={<SignInT/>} />
-                    <Route path={"/signup"} element={<SignUp/>} />
+                    <Route path={"/signup"} element={<SignUpT/>} />
                     <Route path={"/add"} element={<AddGroup/>} />
                     <Route path={"/create"} element={<CreateMessage/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
