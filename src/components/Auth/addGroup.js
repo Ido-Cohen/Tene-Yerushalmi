@@ -3,6 +3,8 @@ import {compose} from "redux";
 import emailjs from '@emailjs/browser';
 import {signUp} from "../../store/actions/authActions";
 import {connect} from "react-redux";
+import axios from "axios";
+import log from "tailwindcss/lib/util/log";
 
 const chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const passwordLength = 6;
@@ -12,7 +14,7 @@ const AddGroup = (props) => {
     const form = useRef();
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
-    const [yearOfGraduate, setYearOfGraduate] = useState(null);
+    const [yearOfGraduate, setYearOfGraduate] = useState("");
 
     let studentDetails = {
         email: '',
@@ -65,7 +67,7 @@ const AddGroup = (props) => {
             fileText = fileText.replace("מקום מגורים נוכחי", "address");
             fileText = fileText.replace("מייל", "email");
             fileText = fileText.replace("לימודים", "studies");
-            fileText = fileText.replace("תעסוקה", "workAt");
+            fileText = fileText.replace("תעסוקה", "work");
             // console.log(fileText);
             const csv2json = require('csvjson-csv2json');
             let json = csv2json(fileText, {parseNumbers: false});
@@ -92,31 +94,35 @@ const AddGroup = (props) => {
                     from_name: 'Tene',
                     password: student.password
                 }
-                studentDetails = ({
+                studentDetails = {
 
                     email: student.email,
+                    handle: student.email.substring(0, student.email.lastIndexOf("@")),
                     password: student.password,
                     phoneNumber: student.phoneNumber,
                     firstName: student.firstName,
                     lastName: student.lastName,
                     parentsAddress: student.parentsAddress,
-                    workAt: student.workAt,
+                    work: student.work,
                     isNewUser:true,
                     gen:student.gen,
                     isAdmin: false,
-                    yearOfGraduate: yearOfGraduate
-                });
+                    yearOfGraduate
+                };
                 const requestOptions = {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(studentDetails),
                 };
-                console.log(studentDetails);
+                console.log(JSON.stringify(studentDetails));
                 // sendEmail();
                 // signUp(studentDetails);
-                fetch("/createUsers",requestOptions)
-                    .then((res) => res.json())
-                    .then((data) => console.log(data.email || data.message));
+                // axios.get('/messages').then(res => {
+                //     console.log(res.data);
+                // })
+                // axios.post("/signup",studentDetails)
+                //     .then((res) => console.log(res))
+
             })
             console.log(json);
         }
