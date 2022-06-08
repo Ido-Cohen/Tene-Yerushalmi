@@ -1,6 +1,6 @@
 import {LockClosedIcon} from '@heroicons/react/solid'
 import React, {useState} from "react";
-import {getUserData, signIn} from "../../store/actions/authActions";
+import {getUserData, signIn, signOut} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 import {Navigate} from "react-router";
 
@@ -108,7 +108,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (creds) => dispatch(signIn(creds))
+        signIn: (creds) => dispatch(signIn(creds)),
+        signOut: () => dispatch(signOut())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignInT);

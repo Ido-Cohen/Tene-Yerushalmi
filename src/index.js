@@ -16,14 +16,18 @@ import {
 import fbConfig from "./config/fbConfig";
 import firebase from "firebase/compat/app";
 import registerServiceWorker from './registerServiceWorker';
+import AppLogout from "./components/Auth/Logout";
+import store,{Persistor} from "./store/reducers/store";
+import {PersistGate} from 'redux-persist/integration/react'
 
-const store = createStore(
-    rootReducer,
-    compose(
-        applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
-        reduxFirestore(firebase, fbConfig)
-    )
-);
+//
+// const store = createStore(
+//     rootReducer,
+//     compose(
+//         applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+//         reduxFirestore(firebase, fbConfig)
+//     )
+// );
 
 
 const rrfConfig = {
@@ -61,13 +65,16 @@ function AuthIsLoaded({children}) {
     return children
 }
 
-
 ReactDOM.render(
     <Provider store={store}>
 
         <ReactReduxFirebaseProvider {...rrfProps}>
             <AuthIsLoaded>
-                <App/>
+                <AppLogout>
+                    <PersistGate Loading={null} persistor={Persistor}>
+                        <App/>
+                    </PersistGate>
+                </AppLogout>
             </AuthIsLoaded>
         </ReactReduxFirebaseProvider>
 

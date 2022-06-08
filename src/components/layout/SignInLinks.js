@@ -69,7 +69,6 @@ const SignInLinks = (props) => {
     );
 }
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         auth: state.firebase.auth,
         authError: state.auth.authError,

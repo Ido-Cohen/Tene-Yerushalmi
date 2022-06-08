@@ -14,6 +14,7 @@ import SignInT from "../Auth/SignInT";
 import SignUpT from "../Auth/SignUpT";
 import AddGroupT from "../Auth/addGroupT";
 import CreateMessageT from "../Messages/CreateMessageT";
+import ContactsListT from '../Contacts/contactListT'
 
 
 const App = () => {
@@ -30,7 +31,7 @@ const App = () => {
                     <Route path={"/create"} element={<CreateMessageT/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
                     <Route path={"/maps"} element={<MapDashboard/>}/>
-                    <Route path={"/contacts"} element={<ContactsList/>}/>
+                    <Route path={"/contacts"} element={<ContactsListT/>}/>
                 </Routes>
             </div>
         </Router>

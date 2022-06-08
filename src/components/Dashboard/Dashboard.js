@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {firestoreConnect} from "react-redux-firebase";
 import {compose} from "redux";
 import {Navigate} from "react-router";
+import AppLogout from "../Auth/Logout";
 
 class Dashboard extends Component{
     render(){
@@ -12,17 +13,18 @@ class Dashboard extends Component{
             return <Navigate replace to={'/signin'}/>
         }
         return (
+
             <div className={"dashboard container"}>
                 <div className={"row"}>
                         <MessageList messages={messages} />
                 </div>
             </div>
+
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
   return{
       messages: state.firestore.ordered.messages,
       auth: state.firebase.auth,
