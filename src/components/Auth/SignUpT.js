@@ -24,7 +24,7 @@ const valueForAdmin = [{
         label: 'מנהל'
     }]
 const SignUpT = (props) => {
-    const {auth, authError} = props;
+    const {auth, authError,isAdmin} = props;
     const [yearData, setYearData] = useState(null);
     const [state, setState] = useState({
         email: '',
@@ -85,7 +85,7 @@ const SignUpT = (props) => {
             [e.target.id]: e.target.value
         }));
     }
-    if (!auth.uid || auth.isAdmin) {
+    if (!auth.uid || !isAdmin) {
         return <Navigate replace to={'/'}/>
     }
 
@@ -167,7 +167,8 @@ const mapStateToProps = (state) => {
     console.log(state)
     return {
         auth: state.firebase.auth,
-        authError: state.auth.authError
+        authError: state.auth.authError,
+        isAdmin: state.auth.isAdmin
     }
 }
 const mapDispatchToProps = (dispatch) => {
