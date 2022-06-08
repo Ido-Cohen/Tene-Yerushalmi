@@ -1,6 +1,6 @@
 import {LockClosedIcon} from '@heroicons/react/solid'
 import React, {useState} from "react";
-import {signIn} from "../../store/actions/authActions";
+import {getUserData, signIn} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 import {Navigate} from "react-router";
 

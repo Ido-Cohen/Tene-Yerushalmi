@@ -1,7 +1,46 @@
-import React from "react";
+import React, {useState} from "react";
 import {LockClosedIcon} from "@heroicons/react/solid";
+import Dropdown from "../Auth/Dropdown";
+import {createMessage} from "../../store/actions/messageActions";
+import {connect} from "react-redux";
+import axios from "axios";
 
 const CreateMessageT = (props) => {
+    const {auth, authError} = props;
+    const [yearData, setYearData] = useState(null);
+    const [state, setState] = useState({title: '', content: '',yearOfGraduate:yearData,uid:auth.uid,handle:auth.email.substring(0,auth.email.lastIndexOf("@"))});
+    const handleYearDropdown = (event) => {
+        setState(prevState => ({
+            ...prevState,
+            'yearOfGraduate':  event,
+        }));
+    };
+    const handleChange = (e) => {
+        setState(prevState => ({
+            ...prevState,
+                [e.target.id]: e.target.value
+        }))
+    };
+    console.log(state);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        axios.post('/message',state,{headers:{
+                'Authorization':'Bearer ' + auth.stsTokenManager.accessToken
+            }}).then(res => {
+            console.log(res);
+        })
+    };
+    async function getYear() {
+        console.log("hey")
+        const response = await axios.get('/getallyears');
+        setYearData(response.data);
+    }
+
+    if (yearData === null){
+        getYear().then(res => {
+            console.log(res);
+        });
+    }
     return (
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8 white pt-5 rounded-lg ">
@@ -11,25 +50,29 @@ const CreateMessageT = (props) => {
                         ניתן לשלוח הודעה כללית והודעה למחזור מסויים
                     </p>
                 </div>
-                <form className="mt-8 ">
+                <form className="mt-8" onSubmit={handleSubmit}>
                     <input type="hidden" name="remember" defaultValue="true"/>
                     <div className="rounded-md shadow-sm -space-y-px">
-                        <div>
-                            <label htmlFor="email-address" className="sr-only">
-                                שם מחזור
-                            </label>
-                            <input
-                                id="email"
-                                name="email"
-                                type="text"
-                                autoComplete="text"
-                                required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm text-right"
-                                placeholder="מספר מחזור"
-                            />
+                        <div className={"pb-5"}>
+                            <Dropdown type={"מחזור"} values={yearData} reference={handleYearDropdown}/>
+                            {/*<label htmlFor="email-address" className="sr-only">*/}
+                            {/*    שם מחזור*/}
+                            {/*</label>*/}
+                            {/*<input*/}
+                            {/*    id="email"*/}
+                            {/*    name="email"*/}
+                            {/*    type="text"*/}
+                            {/*    autoComplete="text"*/}
+                            {/*    required*/}
+                            {/*    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm text-right"*/}
+                            {/*    placeholder="מספר מחזור"*/}
+                            {/*/>*/}
                         </div>
                         <div className="relative w-full mb-3 text-right">
-                            <textarea rows={4} cols={80} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full text-right" placeholder="הקלד הודעה" defaultValue={""} />
+                            <textarea onChange={handleChange} rows={4} cols={80} id={'content'} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full text-right" placeholder="הקלד הודעה" defaultValue={""} />
+                        </div>
+                        <div className="relative w-full mb-3 text-right">
+                            <input onChange={handleChange} type={'text'} id={'title'} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full text-right" placeholder="כותרת" defaultValue={""} />
                         </div>
                         <div className="flex justify-center items-center w-full pt-5">
                             <label htmlFor="dropzone-file" className="flex flex-col justify-center items-center max-w-md w-full h-53 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -39,9 +82,9 @@ const CreateMessageT = (props) => {
                                         <span className="font-semibold">לחץ כדי להעלות קובץ </span>
                                          או גרור לכאן
                                     </p>
-                                    <p className="text-base text-gray-500 dark:text-white"> jpg, pnj, docx, pdf :מהפורמט הבא </p>
+                                    <p className="text-base text-gray-500 dark:text-white"> jpg, png, docx, pdf :מהפורמט הבא </p>
                                 </div>
-                                <input id="dropzone-file" type="file" className="hidden" required/>
+                                <input id="dropzone-file" type="file" className="hidden"/>
                             </label>
                         </div>
                     </div>
@@ -58,5 +101,15 @@ const CreateMessageT = (props) => {
         </div>
     )
 }
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
 
-export default CreateMessageT;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createMessage: (message) => dispatch(createMessage(message))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CreateMessageT);

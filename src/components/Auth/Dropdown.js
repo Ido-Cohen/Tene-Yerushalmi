@@ -24,7 +24,7 @@ const Dropdown = (props) => {
                     label={type}
                     onChange={handleChange}
                 >
-                    {values.map((num) => {
+                    {values && values.map((num) => {
                         return (
                             <MenuItem value={num.value} style={{justifyContent: "right"}} key={num.value}>{num.label}</MenuItem>)
                     })}

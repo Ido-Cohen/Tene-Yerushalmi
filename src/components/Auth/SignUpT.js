@@ -8,7 +8,12 @@ import Dropdown from "./Dropdown";
 import {Navigate} from "react-router";
 import {signUp} from "../../store/actions/authActions";
 import {connect} from "react-redux";
+import axios from "axios";
+import log from "tailwindcss/lib/util/log";
+import {data} from "autoprefixer";
 
+const chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const passwordLength = 6;
 let params;
 const valueForAdmin = [{
     value: false,
@@ -18,15 +23,12 @@ const valueForAdmin = [{
         value: true,
         label: 'מנהל'
     }]
-const mahzor = [{value: 1, label: 1}, {value: 2, label: 2}, {value: 3, label: 3}, {value: 4, label: 4}, {
-    value: 5,
-    label: 5
-}];
 const SignUpT = (props) => {
     const {auth, authError} = props;
+    const [yearData, setYearData] = useState(null);
     const [state, setState] = useState({
         email: '',
-        password: '',
+        password: generatePassword(),
         phoneNumber: '',
         firstName: '',
         lastName: '',
@@ -34,23 +36,34 @@ const SignUpT = (props) => {
         work: '',
         yearOfGraduate: '',
         isAdmin: '',
+        isNewUser: true,
+        isNewYear: false
     });
 
+    async function getYear() {
+        const response = await axios.get('/getallyears');
+        setYearData(response.data);
+    }
+
     const handleAdminDropdown = (event) => {
+        if (!event){
+            getYear().then(res => {
+                console.log(res);
+            });
+        }
         setState(prevState => ({
             ...prevState,
-            'isAdmin':event !== false,
+            'isAdmin': event !== false,
+            'isNewYear': false
         }));
-        // setInput(prevState => ({
-        //     ...prevState,
-        //     isAdmin: event, noAdmin: event === false ? 'false' : 'true'
-        // }));
+
     };
     const handleYearDropdown = (event) => {
         setState(prevState => ({
             ...prevState,
-            'isAdmin':false,
-            'yearOfGraduate': event
+            'isAdmin': false,
+            'yearOfGraduate': event === 'חדש' ? '' : event,
+            'isNewYear': event === 'חדש'
         }));
     };
     const handleSubmit = (e, signUp) => {
@@ -62,18 +75,22 @@ const SignUpT = (props) => {
             password: state.password
         }
         // sendEmail();
-        signUp(state);
+        // signUp(state);
+        axios.post("/signup", state)
+            .then((res) => console.log(res))
     }
     const handleChange = (e) => {
         setState(prevState => ({
             ...prevState,
             'isAdmin': state.isAdmin,
+            'handle': state?.email.substring(0, state?.email.lastIndexOf("@")),
             [e.target.id]: e.target.value
         }));
     }
     if (!auth.uid) {
         return <Navigate replace to={'/'}/>
     }
+
     return (
         <div className="bg-grey-lighter min-h-full flex flex-col py-12 px-4 sm:px-6 lg:px-8">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-1 ">
@@ -86,8 +103,8 @@ const SignUpT = (props) => {
                             <Dropdown type={"סוג משתמש"} values={valueForAdmin} reference={handleAdminDropdown}/>
                         </div>
                         <div className={'float left'}>
-                            {state.isAdmin === false ?
-                                <Dropdown type={"מחזור"} values={mahzor} reference={handleYearDropdown}/> : ''}
+                            {state.isAdmin === false && yearData ?
+                                <Dropdown type={"מחזור"} values={yearData} reference={handleYearDropdown}/> : ''}
                         </div>
                         <input type="text" id={"email"}
                                className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
@@ -128,13 +145,15 @@ const SignUpT = (props) => {
                                onChange={(e) => {
                                    handleChange(e)
                                }}/>
-                        <input type="password" id={"password"}
-                               className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
-                               name="password"
-                               placeholder="סיסמה"
-                               onChange={(e) => {
-                                   handleChange(e)
-                               }}/>
+                        {state.isNewYear ? <input type="text" pattern="[0-9]*"
+                                                  className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
+                                                  placeholder="מספר מחזור חדש" required value={state.yearOfGraduate}
+                                                  id={"yearOfGraduate"}
+                                                  onChange={(e) => setState(prevState => ({
+                                                      ...prevState,
+                                                      'yearOfGraduate': e.target.value.replace(/\D/, '')
+                                                  }))}/> : ''}
+
                         <button type="submit" id={"submit"}
                                 className="w-full text-center py-3 rounded text-white bg-orange-400 hover:bg-orange-600 focus:outline-none my-1 text-center">יצירת
                             משתמש
@@ -147,6 +166,7 @@ const SignUpT = (props) => {
     );
 };
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         auth: state.firebase.auth,
         authError: state.auth.authError
@@ -158,3 +178,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpT);
+
+function generatePassword() {
+    let password = "";
+    for (let i = 0; i <= passwordLength; i++) {
+        const randomNumber = Math.floor(Math.random() * chars.length);
+        password += chars.substring(randomNumber, randomNumber + 1);
+    }
+    return password;
+}

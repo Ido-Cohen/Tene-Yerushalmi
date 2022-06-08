@@ -118,8 +118,8 @@ const AddGroupT  = (props) => {
                 // axios.get('/messages').then(res => {
                 //     console.log(res.data);
                 // })
-                // axios.post("/signup",studentDetails)
-                //     .then((res) => console.log(res))
+                axios.post("/signup",studentDetails)
+                    .then((res) => console.log(res))
 
             })
             console.log(json);
