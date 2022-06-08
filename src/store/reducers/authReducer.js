@@ -1,6 +1,7 @@
 const initState = {
     authError: null,
-    isAdmin:false
+    isAdmin:false,
+    handle:''
 };
 const authReducer = (state = initState, action) => {
     switch (action.type) {
@@ -14,7 +15,8 @@ const authReducer = (state = initState, action) => {
             return {
                 ...state,
                 authError: null,
-                isAdmin: action.admin
+                isAdmin: action.admin,
+                handle: action.handle
             };
         case 'SIGNOUT_SUCCESS':
             console.log('signout success');

@@ -19,9 +19,9 @@ const SignInLinks = (props) => {
                     <NavLink to={'/signin'} onClick={props.signOut}>התנתקות</NavLink>
                 </li>
 
-                <li>
+                {isAdmin ? <li>
                     <NavLink to={'/maps'}>מפה</NavLink>
-                </li>
+                </li> : ''}
                 <li>
                     <NavLink to={'/contacts'}>אנשי קשר</NavLink>
                 </li>
@@ -43,9 +43,9 @@ const SignInLinks = (props) => {
                     <NavLink to={'/signin'} onClick={props.signOut}>התנתקות</NavLink>
                 </li>
 
-                <li>
+                {isAdmin ? <li>
                     <NavLink to={'/maps'}>מפה</NavLink>
-                </li>
+                </li> : ''}
                 <li>
                     <NavLink to={'/contacts'}>אנשי קשר</NavLink>
                 </li>
@@ -56,11 +56,11 @@ const SignInLinks = (props) => {
                     <NavLink to={'/settings'}
                              >הגדרות משתמשים</NavLink>
                 </li>
-                <li>
+                {isAdmin ? <li>
                     <NavLink to={'/add'}
                     >הוספת קבוצה</NavLink>
-                </li>
-                <li><NavLink to={'/signup'}>רישום יחיד</NavLink></li>
+                </li> : ''}
+                {isAdmin ? <li><NavLink to={'/signup'}>רישום יחיד</NavLink></li> : ''}
 
 
             </ul>

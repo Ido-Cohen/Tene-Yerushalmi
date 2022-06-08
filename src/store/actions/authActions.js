@@ -7,7 +7,7 @@ export const signIn = (credentials) => {
           credentials.password
       ).then(() => {
           firebase.auth().currentUser.getIdTokenResult().then(token => {
-              dispatch({type :'LOGIN_SUCCESS',admin:token.claims.admin})
+              dispatch({type :'LOGIN_SUCCESS',admin:token.claims.admin,handle:credentials.email.substring(0,credentials.email.lastIndexOf('@'))})
           })
       }).catch((err) => {
           dispatch({type: 'LOGIN_ERROR',err})

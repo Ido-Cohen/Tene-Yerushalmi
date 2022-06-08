@@ -25,6 +25,7 @@ const ContactList = (props) => {
     );
 };
 const mapStateToProps = (state) => {
+    console.log(state);
     return{
         users: state.firestore.ordered.users,
         auth: state.firebase.auth,
@@ -35,4 +36,3 @@ export default compose(connect(mapStateToProps),firestoreConnect([
         collection:'users'
     }
 ]))(ContactList);
-///

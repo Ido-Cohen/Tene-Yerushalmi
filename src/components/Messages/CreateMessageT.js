@@ -4,9 +4,11 @@ import Dropdown from "../Auth/Dropdown";
 import {createMessage} from "../../store/actions/messageActions";
 import {connect} from "react-redux";
 import axios from "axios";
+import {firestoreConnect} from "react-redux-firebase";
+import {compose} from "redux";
 
 const CreateMessageT = (props) => {
-    const {auth, authError} = props;
+    const {auth, authError,currentUser,isAdmin} = props;
     const [yearData, setYearData] = useState(null);
     const [state, setState] = useState({title: '', content: '',yearOfGraduate:yearData,uid:auth.uid,handle:auth.email.substring(0,auth.email.lastIndexOf("@"))});
     const handleYearDropdown = (event) => {
@@ -21,7 +23,6 @@ const CreateMessageT = (props) => {
                 [e.target.id]: e.target.value
         }))
     };
-    console.log(state);
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.post('/message',state,{headers:{
@@ -31,9 +32,8 @@ const CreateMessageT = (props) => {
         })
     };
     async function getYear() {
-        console.log("hey")
         const response = await axios.get('/getallyears');
-        setYearData(response.data);
+        isAdmin ? setYearData(response.data) : setYearData(currentUser.yearOfGraduate);
     }
 
     if (yearData === null){
@@ -55,18 +55,6 @@ const CreateMessageT = (props) => {
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div className={"pb-5"}>
                             <Dropdown type={"מחזור"} values={yearData} reference={handleYearDropdown}/>
-                            {/*<label htmlFor="email-address" className="sr-only">*/}
-                            {/*    שם מחזור*/}
-                            {/*</label>*/}
-                            {/*<input*/}
-                            {/*    id="email"*/}
-                            {/*    name="email"*/}
-                            {/*    type="text"*/}
-                            {/*    autoComplete="text"*/}
-                            {/*    required*/}
-                            {/*    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm text-right"*/}
-                            {/*    placeholder="מספר מחזור"*/}
-                            {/*/>*/}
                         </div>
                         <div className="relative w-full mb-3 text-right">
                             <textarea onChange={handleChange} rows={4} cols={80} id={'content'} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full text-right" placeholder="הקלד הודעה" defaultValue={""} />
@@ -102,14 +90,25 @@ const CreateMessageT = (props) => {
     )
 }
 const mapStateToProps = (state) => {
+    const handle = state.auth.handle;
+    const users = state.firestore.ordered.users;
+    const user = users.filter(user => {
+        return user.handle === handle;
+    });
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        isAdmin: state.auth.isAdmin,
+        currentUser :user
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        createMessage: (message) => dispatch(createMessage(message))
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         createMessage: (message) => dispatch(createMessage(message))
+//     }
+// }
+export default compose(connect(mapStateToProps),firestoreConnect([
+    {
+        collection:'users'
     }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(CreateMessageT);
+]))(CreateMessageT);
