@@ -12,6 +12,8 @@ import MapDashboard from "../Maps/mapDashboard";
 import ContactsList from  "../Contacts/contactList";
 import SignInT from "../Auth/SignInT";
 import SignUpT from "../Auth/SignUpT";
+import AddGroupT from "../Auth/addGroupT";
+import CreateMessageT from "../Messages/CreateMessageT";
 
 
 const App = () => {
@@ -24,8 +26,8 @@ const App = () => {
                     <Route path={"/message/:id"} element={<MessageDetails/>} />
                     <Route path={"/signin"} element={<SignInT/>} />
                     <Route path={"/signup"} element={<SignUpT/>} />
-                    <Route path={"/add"} element={<AddGroup/>} />
-                    <Route path={"/create"} element={<CreateMessage/>}/>
+                    <Route path={"/add"} element={<AddGroupT/>} />
+                    <Route path={"/create"} element={<CreateMessageT/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
                     <Route path={"/maps"} element={<MapDashboard/>}/>
                     <Route path={"/contacts"} element={<ContactsList/>}/>

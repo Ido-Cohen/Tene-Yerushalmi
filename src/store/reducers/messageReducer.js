@@ -16,6 +16,8 @@ const messageReducer = (state = initState, action) => {
         case 'DELETE_MSG':
             console.log("deleting message")
             return state;
+        case 'GET_DETAILS':
+            return state;
         default:
             return state;
     }

@@ -68,14 +68,12 @@ const SignUpT = (props) => {
     };
     const handleSubmit = (e, signUp) => {
         e.preventDefault();
-        params = {
-            email: state.email,
-            name: state.firstName,
-            from_name: 'Tene',
-            password: state.password
-        }
         // sendEmail();
         // signUp(state);
+        console.log(state)
+        axios.post('/sendemail',{email:state.email,password: state.password}).then(email => {
+            console.log("email sent successfully")
+        })
         axios.post("/signup", state)
             .then((res) => console.log(res))
     }
@@ -87,7 +85,7 @@ const SignUpT = (props) => {
             [e.target.id]: e.target.value
         }));
     }
-    if (!auth.uid) {
+    if (!auth.uid || auth.isAdmin) {
         return <Navigate replace to={'/'}/>
     }
 

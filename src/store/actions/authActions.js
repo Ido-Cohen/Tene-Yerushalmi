@@ -1,4 +1,4 @@
-import getAuth from '@firebase/auth';
+
 export const signIn = (credentials) => {
   return (dispatch,getState,{getFirebase}) => {
       const firebase = getFirebase();
@@ -6,7 +6,9 @@ export const signIn = (credentials) => {
           credentials.email,
           credentials.password
       ).then(() => {
-          dispatch({type :'LOGIN_SUCCESS'})
+          firebase.auth().currentUser.getIdTokenResult().then(token => {
+              dispatch({type :'LOGIN_SUCCESS',admin:token.claims.admin})
+          })
       }).catch((err) => {
           dispatch({type: 'LOGIN_ERROR',err})
       });

@@ -22,6 +22,7 @@ class Dashboard extends Component{
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
   return{
       messages: state.firestore.ordered.messages,
       auth: state.firebase.auth,
