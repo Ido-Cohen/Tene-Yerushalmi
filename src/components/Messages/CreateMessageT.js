@@ -33,7 +33,8 @@ const CreateMessageT = (props) => {
     };
     async function getYear() {
         const response = await axios.get('/getallyears');
-        isAdmin ? setYearData(response.data) : setYearData({value: currentUser[0].yearOfGraduate,label:currentUser[0].yearOfGraduate});
+        console.log(response.data);
+        isAdmin ? setYearData(response.data) : setYearData([{value: currentUser[0].yearOfGraduate,label:currentUser[0].yearOfGraduate}]);
     }
 
     if (yearData === null){
