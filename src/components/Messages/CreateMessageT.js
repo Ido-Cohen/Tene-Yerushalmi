@@ -92,9 +92,12 @@ const CreateMessageT = (props) => {
 const mapStateToProps = (state) => {
     const handle = state.auth.handle;
     const users = state.firestore.ordered.users;
-    const user = users.filter(user => {
-        return user.handle === handle;
-    });
+    let user;
+    if (users){
+        user = users.filter(user => {
+            return user.handle === handle;
+        });
+    }
     return {
         auth: state.firebase.auth,
         isAdmin: state.auth.isAdmin,
