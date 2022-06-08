@@ -5,6 +5,7 @@ import {signOut} from "../../store/actions/authActions";
 
 
 const SignInLinks = (props) => {
+    const {isAdmin} = props;
     return (
         <div className={'sign-in-links'}>
 
@@ -27,10 +28,10 @@ const SignInLinks = (props) => {
                 <li>
                     <NavLink to={'/create'}>הודעה חדשה</NavLink>
                 </li>
-                <li>
+                {isAdmin ?  <li>
                     <NavLink to={'/add'}>הוספת קבוצה</NavLink>
-                </li>
-                <li><NavLink to={'/signup'}>רישום יחיד</NavLink></li>
+                </li> : ''}
+                {isAdmin ? <li><NavLink to={'/signup'}>רישום יחיד</NavLink></li> : ''}
 
 
 
@@ -67,9 +68,17 @@ const SignInLinks = (props) => {
 
     );
 }
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        auth: state.firebase.auth,
+        authError: state.auth.authError,
+        isAdmin: state.auth.isAdmin
+    }
+}
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => dispatch(signOut())
     }
 }
-export default connect(null, mapDispatchToProps)(SignInLinks);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInLinks);
