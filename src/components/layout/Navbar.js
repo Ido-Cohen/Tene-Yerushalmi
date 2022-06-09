@@ -23,6 +23,7 @@ const Navbar = (props) => {
               {links}
           </div>
       </nav>
+
   );
 }
 const mapStateToProps = (state) => {

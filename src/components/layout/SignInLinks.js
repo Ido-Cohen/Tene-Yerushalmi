@@ -5,8 +5,10 @@ import {signOut} from "../../store/actions/authActions";
 
 
 const SignInLinks = (props) => {
-    const {isAdmin} = props;
+    const {isAdmin,profile} = props;
+    console.log(profile);
     return (
+
         <div className={'sign-in-links'}>
 
             <ul className={"right hide-on-med-and-down"}>
@@ -69,10 +71,11 @@ const SignInLinks = (props) => {
     );
 }
 const mapStateToProps = (state) => {
+
     return {
         auth: state.firebase.auth,
         authError: state.auth.authError,
-        isAdmin: state.auth.isAdmin
+        isAdmin: state.auth.isAdmin,
     }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -25,7 +25,7 @@ const AppLogout = ({ children ,signOut,auth}) => {
             });
             // logs out user
             logoutAction();
-        }, 5 * 60 * 1000); // 10000ms = 10secs. You can change the time.
+        }, 5 * 60 * 1000 *3); // 10000ms = 10secs. You can change the time.
     };
 
 // this resets the timer if it exists.

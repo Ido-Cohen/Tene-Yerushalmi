@@ -15,6 +15,8 @@ import SignUpT from "../Auth/SignUpT";
 import AddGroupT from "../Auth/addGroupT";
 import CreateMessageT from "../Messages/CreateMessageT";
 import ContactsListT from '../Contacts/contactListT'
+import Example from "../layout/example";
+import {Footer} from "flowbite-react";
 
 
 const App = () => {
@@ -33,8 +35,24 @@ const App = () => {
                     <Route path={"/maps"} element={<MapDashboard/>}/>
                     <Route path={"/contacts"} element={<ContactsListT/>}/>
                 </Routes>
+                <Footer className={"fixed bottom-0 left-0 w-full"}>
+                    <Footer.Copyright
+                        href="https://tenejlm.co.il/"
+                        by="TeneJLM™"
+                        year={2022}
+                    />
+                    <Footer.LinkGroup className="mt-3 flex-wrap items-center text-sm sm:mt-0">
+                        <Footer.Link href="https://tenejlm.co.il/">
+                            About
+                        </Footer.Link>
+                        <Footer.Link href="https://tenejlm.co.il/contacts/">
+                            Contact
+                        </Footer.Link>
+                    </Footer.LinkGroup>
+                </Footer>
             </div>
         </Router>
+
 
     );
 };

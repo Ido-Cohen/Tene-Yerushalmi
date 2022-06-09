@@ -1,6 +1,3 @@
-import {getFirebase} from "react-redux-firebase";
-import {getFirestore} from "redux-firestore";
-
 
 export const createMessage = (message) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
