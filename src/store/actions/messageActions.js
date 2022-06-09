@@ -11,6 +11,7 @@ export const createMessage = (message) => {
             ...message,
             authorFirstName: profile.firstName,
             authorLastName: profile.lastName,
+            yearOfGraduate:profile.yearOfGraduate,
             authorId: authorId,
             createdAt: new Date()
         }).then(() => {
