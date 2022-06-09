@@ -10,12 +10,12 @@ const Dashboard = (props) => {
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }
-    console.log(currentUser);
+    console.log(isAdmin);
     if (currentUser && currentUser[0].isNewUser){
         return <Navigate replace to={'/reset-password/new-user'}/>
     }
     let sorted;
-    if (messages) {
+    if (currentUser && messages) {
         sorted = messages.slice().sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate());
         if (!isAdmin){
             sorted = sorted.filter(msg => {
