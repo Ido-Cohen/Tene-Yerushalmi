@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react';
+import React,{Component} from 'react';
 import MessageList from "../Messages/MessageList";
 import {connect} from "react-redux";
 import {firestoreConnect} from "react-redux-firebase";
