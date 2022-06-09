@@ -9,7 +9,7 @@ const SignInLinks = (props) => {
     return (
         <div className={'sign-in-links'}>
 
-            <ul className={"left hide-on-med-and-down"}>
+            <ul className={"right hide-on-med-and-down"}>
                 <li>
                     <div className={"btn btn-floating pink lighten-1"}>{props.profile.initials}</div>
                 </li>

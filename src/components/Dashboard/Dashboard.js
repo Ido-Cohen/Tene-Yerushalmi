@@ -10,6 +10,10 @@ const Dashboard = (props) => {
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }
+    console.log(currentUser);
+    if (currentUser && currentUser[0].isNewUser){
+        return <Navigate replace to={'/reset-password/new-user'}/>
+    }
     let sorted;
     if (messages) {
         sorted = messages.slice().sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate());
@@ -39,6 +43,8 @@ const mapStateToProps = (state) => {
             return user.handle === handle;
         });
     }
+    console.log(state);
+
     return {
         messages: state.firestore.ordered.messages,
         auth: state.firebase.auth,
@@ -46,11 +52,11 @@ const mapStateToProps = (state) => {
         currentUser: user
     }
 }
-export default compose(connect(mapStateToProps), firestoreConnect([
+export default compose( firestoreConnect([
     {
         collection: 'messages'
 
     }, {
         collection: 'users'
     }
-]))(Dashboard);
+]),connect(mapStateToProps))(Dashboard);

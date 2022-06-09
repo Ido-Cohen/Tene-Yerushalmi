@@ -5,15 +5,18 @@ import {Navigate} from "react-router";
 import {createMessage} from "../../store/actions/messageActions";
 import moment from "moment";
 import ChangePassword from "./ChangePassword";
+import {compose} from "redux";
+import {firestoreConnect} from "react-redux-firebase";
 // import firebase from "firebase/compat/app";
 
 let passError = '';
 const NewUserLandingPage = (props) => {
 
-    const {authError,auth,users} = props;
-    // if (!auth.uid || !users) {
-    //     return <Navigate replace to={'/signin'}/>
-    // }
+    const {authError, auth, users, handle} = props;
+    console.log(handle);
+    if (!auth.uid || !users) {
+        return <Navigate replace to={'/signin'}/>
+    }
     // if (!users[auth.uid].isNewUser){
     //     return <Navigate replace to={'/'}/>
     // }
@@ -21,7 +24,7 @@ const NewUserLandingPage = (props) => {
     return (
         <div className={"container"}>
             <h4 className={"center-align grey-text text-darken-3"}>
-                !שלום {users[auth.uid].firstName}, ברוכים הבאים לאפליקציית הבוגרים של טנא ירושלמי
+                שלום {users[handle]?.firstName}, ברוכים הבאים לאפליקציית הבוגרים של טנא ירושלמי
             </h4>
             <h6 className={"center-align grey-text text-darken-3"}>
                 .זוהי התחברות ראשונה, עליך לבחור סיסמא חדשה
@@ -32,11 +35,13 @@ const NewUserLandingPage = (props) => {
     );
 }
 const mapStateToProps = (state) => {
+    console.log(state)
     // console.log(state.firestore.data.users[state.firebase.auth.uid]);
     return {
         authError: state.auth.authError,
         auth: state.firebase.auth,
-        users: state.firestore.data.users
+        users: state.firestore.ordered.users,
+        handle: state.auth.handle
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -45,4 +50,11 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewUserLandingPage);
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect([
+    {
+        collection: 'messages'
+
+    }, {
+        collection: 'users'
+    }
+]))(NewUserLandingPage);

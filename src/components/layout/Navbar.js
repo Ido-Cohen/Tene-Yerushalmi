@@ -7,12 +7,12 @@ import M from  'materialize-css/dist/js/materialize.min.js';
 import NewUserLinks from "./NewUserLinks";
 
 const Navbar = (props) => {
-    const {auth,profile,users} = props;
-    // let links = auth.uid ? (users[auth.uid].isNewUser ? <NewUserLinks profile={profile}/> :<SignInLinks profile={profile}/>) : <SignOutLinks/>
+    const {auth,profile,users,handle} = props;
+    // let links = auth.uid ? (users[handle].isNewUser ? <NewUserLinks profile={profile}/> :<SignInLinks profile={profile}/>) : <SignOutLinks/>
     let links = <SignOutLinks/>;
     if(auth.uid){
         links = <SignInLinks profile={profile}/>;
-        if (users && users[auth.uid].isNewUser){
+        if (users && users[handle].isNewUser){
             links = <NewUserLinks profile={profile}/>;
         }
     }
@@ -38,7 +38,8 @@ const mapStateToProps = (state) => {
   return{
       auth: state.firebase.auth,
       profile: state.firebase.profile,
-      users: state.firestore.data.users
+      users: state.firestore.data.users,
+      handle:state.auth.handle
   }
 }
 export default connect(mapStateToProps)(Navbar);
