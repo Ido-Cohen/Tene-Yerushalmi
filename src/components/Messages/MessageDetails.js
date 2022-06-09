@@ -9,7 +9,7 @@ import {deleteMessage} from "../../store/actions/messageActions";
 moment.locale('he')
 
 const MessageDetails = (props) => {
-    const {message, auth} = props;
+    const {message, auth,isAdmin} = props;
     const navigate = useNavigate();
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
@@ -33,9 +33,9 @@ const MessageDetails = (props) => {
                         <div>{moment(message.createdAt.toDate()).calendar()}</div>
                     </div>
                     <div className="card-action">
-                        <a onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
+                        {isAdmin ? <a onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
                             <i className="medium material-icons">delete</i>
-                        </a>
+                        </a> : ''}
                     </div>
                 </div>
             </div>
@@ -59,7 +59,8 @@ const mapStateToProps = (state, ownProps) => {
     const message = messages ? messages[id] : null;
     return {
         message: message,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        isAdmin:state.auth.isAdmin
     }
 }
 const mapDispatchToProps = (dispatch) => {
