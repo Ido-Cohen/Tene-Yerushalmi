@@ -4,8 +4,9 @@ import {firestoreConnect} from "react-redux-firebase";
 import {compose} from "redux";
 import withRouter from './withRouter';
 import {Navigate, useNavigate} from "react-router";
-import moment from "moment";
+import moment from "moment/min/moment-with-locales";
 import {deleteMessage} from "../../store/actions/messageActions";
+moment.locale('he')
 
 const MessageDetails = (props) => {
     const {message, auth} = props;

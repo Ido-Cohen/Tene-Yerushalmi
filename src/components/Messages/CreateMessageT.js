@@ -10,6 +10,7 @@ import {compose} from "redux";
 const CreateMessageT = (props) => {
     const {auth, authError,currentUser,isAdmin} = props;
     const [yearData, setYearData] = useState(null);
+    const [messagesCreated, setMessagesCreated] = useState(null);
     const [state, setState] = useState({title: '', content: '',yearOfGraduate:yearData,uid:auth.uid,handle:auth.email.substring(0,auth.email.lastIndexOf("@"))});
     const handleYearDropdown = (event) => {
         setState(prevState => ({
@@ -29,17 +30,19 @@ const CreateMessageT = (props) => {
                 'Authorization':'Bearer ' + auth.stsTokenManager.accessToken
             }}).then(res => {
             console.log(res);
+            setMessagesCreated({err: true,msg :"הודעה חדשה נשלחה בהצלחה!"});
+        }).catch(() => {
+            setMessagesCreated({err: false,msg : 'משהו השתבש'})
         })
     };
     async function getYear() {
-        const response = await axios.get('/getallyears');
+        const response = await axios.get('/getyearsnonew');
         console.log(response.data);
         isAdmin ? setYearData(response.data) : setYearData([{value: currentUser[0].yearOfGraduate,label:currentUser[0].yearOfGraduate}]);
     }
 
     if (yearData === null){
         getYear().then(res => {
-            console.log(res);
         });
     }
     return (
@@ -85,6 +88,9 @@ const CreateMessageT = (props) => {
                             שליחת הודעה
                         </button>
                     </div>
+                    <div className={"text-center"}>
+                    {messagesCreated ? <p className={`text-${messagesCreated.err ? 'red' : 'blue'}-600`}>{messagesCreated.msg}</p> : ''}
+                    </div>
                 </form>
             </div>
         </div>
@@ -99,6 +105,7 @@ const mapStateToProps = (state) => {
             return user.handle === handle;
         });
     }
+    console.log(state);
     return {
         auth: state.firebase.auth,
         isAdmin: state.auth.isAdmin,
@@ -106,12 +113,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         createMessage: (message) => dispatch(createMessage(message))
-//     }
-// }
-export default compose(connect(mapStateToProps),firestoreConnect([
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createMessage: (message) => dispatch(createMessage(message))
+    }
+}
+export default compose(connect(mapStateToProps,mapDispatchToProps),firestoreConnect([
     {
         collection:'users'
     }

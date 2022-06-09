@@ -1,6 +1,6 @@
 import React from "react";
-import moment from "moment";
-
+import moment from "moment/min/moment-with-locales";
+moment.locale('he')
 
 const MessageSummary = ({message}) => {
   return (
