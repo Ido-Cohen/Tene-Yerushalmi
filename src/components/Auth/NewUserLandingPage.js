@@ -11,12 +11,12 @@ let passError = '';
 const NewUserLandingPage = (props) => {
 
     const {authError,auth,users} = props;
-    if (!auth.uid || !users) {
-        return <Navigate replace to={'/signin'}/>
-    }
-    if (!users[auth.uid].isNewUser){
-        return <Navigate replace to={'/'}/>
-    }
+    // if (!auth.uid || !users) {
+    //     return <Navigate replace to={'/signin'}/>
+    // }
+    // if (!users[auth.uid].isNewUser){
+    //     return <Navigate replace to={'/'}/>
+    // }
 
     return (
         <div className={"container"}>
@@ -25,6 +25,7 @@ const NewUserLandingPage = (props) => {
             </h4>
             <h6 className={"center-align grey-text text-darken-3"}>
                 .זוהי התחברות ראשונה, עליך לבחור סיסמא חדשה
+                ולעדכן מספר נוסף של פרטים.
             </h6>
             <ChangePassword/>
         </div>

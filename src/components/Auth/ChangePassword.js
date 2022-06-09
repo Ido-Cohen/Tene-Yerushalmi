@@ -58,28 +58,65 @@ const ChangePassword = (props) => {
     }
 
     return (
-        <div className={"container"}>
-            <form className={"white right-align"} onSubmit={handleSubmit}>
-                <h5 className={"grey-text text-darken-3"}>שינוי סיסמא</h5>
-                <div className={"input-field"}>
-                    <label>הקלידו סיסמא נוכחית</label>
-                    <input type={"password"} id={"currPassword"} onChange={currPasswordChange}/>
+        // <div className={"container"}>
+        //     <form className={"white right-align"} onSubmit={handleSubmit}>
+        //         <h5 className={"grey-text text-darken-3"}>שינוי סיסמא</h5>
+        //         <div className={"input-field"}>
+        //             <label>הקלידו סיסמא נוכחית</label>
+        //             <input type={"password"} id={"currPassword"} onChange={currPasswordChange}/>
+        //         </div>
+        //         <div className={"input-field"}>
+        //             <label>בחרו סיסמא חדשה</label>
+        //             <input type={"password"} id={"password1"} onChange={handleChange}/>
+        //         </div>
+        //         <div className={"input-field"}>
+        //             <label>חיזרו על הסיסמא החדשה</label>
+        //             <input type={"password"} id={"password2"} onChange={handleChange}/>
+        //         </div>
+        //         <div className={"red-text center"}>
+        //             {passError.length !== 0 ? <p>{passError}</p> : null}
+        //         </div>
+        //         <div className={"input-field"}>
+        //             <button className={`btn ${isValidPassword?'':'disabled'} orange lighten-1 z-depth-0`}>שינוי סיסמא</button>
+        //         </div>
+        //     </form>
+        // </div>
+
+        <div className="blue-grey-text min-h-full flex flex-col py-12 px-4 sm:px-6 lg:px-8">
+            <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-1 ">
+                <div className="bg-blue px-1 py-8 rounded shadow-md text-black w-full rounded-lg">
+                    <form className="mt-8 space-y-6">
+                        <h2 className="mb-8 text-3xl text-center">שינוי סיסמה</h2>
+                        <input type="text" id={"current_password"}
+                               className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
+                               name="current_password"
+                               placeholder="הקלידו סיסמה נוכחית"
+                        />
+                        <input type="text" id={"password"}
+                               className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
+                               name="password" placeholder="בחרו סיסמה חדשה"
+                        />
+                        <input type="text" id={"confirm_password"}
+                               className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
+                               name="confirm_password"
+                               placeholder="חיזרו על הסיסמה חדשה"
+                        />
+                        <input type="text" id={"address"}
+                               className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
+                               name="address"
+                               placeholder="כתובת מגורים"
+                        />
+                        <input type="text" id={"work"}
+                               className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
+                               name="work"
+                               placeholder="עבודה"
+                        />
+                        <button type="submit" id={"submit"}
+                                className="w-full text-center py-3 rounded text-white bg-orange-400 hover:bg-orange-600 focus:outline-none my-1 text-center">צור חשבון
+                        </button>
+                    </form>
                 </div>
-                <div className={"input-field"}>
-                    <label>בחרו סיסמא חדשה</label>
-                    <input type={"password"} id={"password1"} onChange={handleChange}/>
-                </div>
-                <div className={"input-field"}>
-                    <label>חיזרו על הסיסמא החדשה</label>
-                    <input type={"password"} id={"password2"} onChange={handleChange}/>
-                </div>
-                <div className={"red-text center"}>
-                    {passError.length !== 0 ? <p>{passError}</p> : null}
-                </div>
-                <div className={"input-field"}>
-                    <button className={`btn ${isValidPassword?'':'disabled'} orange lighten-1 z-depth-0`}>שינוי סיסמא</button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 }
