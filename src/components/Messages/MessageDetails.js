@@ -22,7 +22,7 @@ const MessageDetails = (props) => {
 
     if (message) {
         return (
-            <div className={"container section message-details"}>
+            <div className={"container section message-details right-align"}>
                 <div className={"card z-depth-0"}>
                     <div className={"card-content"}>
                         <span className="card-title">{message.title}</span>
@@ -32,7 +32,7 @@ const MessageDetails = (props) => {
                         <div>Posted by {message.authorFirstName} {message.authorLastName}</div>
                         <div>{moment(message.createdAt.toDate()).calendar()}</div>
                     </div>
-                    <div className="card-action">
+                    <div className="card-action left-align">
                         {isAdmin ? <a onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
                             <i className="medium material-icons">delete</i>
                         </a> : ''}
