@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {signIn} from "../../store/actions/authActions";
 import {Navigate} from "react-router";
+
+import {NavLink} from "react-router-dom";
+// import userDetails from "../Settings/userDetails";
 import axios from "axios";
 //check
 class SignIn extends Component {
@@ -17,8 +20,11 @@ class SignIn extends Component {
         this.props.signIn(this.state);
     }
     render() {
-        const {authError,auth} = this.props;
+        const {authError,auth,users} = this.props;
         if (auth.uid){
+            if(users && users[auth.uid].isNewUser){
+                return <Navigate replace to={'/reset-password/new-user'}/>
+            }
             return <Navigate replace to={'/'}/>
         }
         return (
@@ -39,15 +45,20 @@ class SignIn extends Component {
                             {authError ? <p>{authError}</p> : null}
                         </div>
                     </div>
+                    <div className={"orange-text center-align"}>
+                        <NavLink to={"/forgot-password"}>שכחתי סיסמא</NavLink>
+                    </div>
                 </form>
             </div>
         );
     }
 }
 const mapStateToProps = (state) => {
+    // console.log(state.firestore.data.users[state.firebase.auth.uid]);
   return {
       authError: state.auth.authError,
-      auth: state.firebase.auth
+      auth: state.firebase.auth,
+      users: state.firestore.data.users
   }
 }
 
