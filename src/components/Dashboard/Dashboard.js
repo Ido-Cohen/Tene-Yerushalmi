@@ -15,7 +15,7 @@ const Dashboard = (props) => {
         sorted = messages.slice().sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate());
         if (!isAdmin){
             sorted = sorted.filter(msg => {
-                return msg?.yearOfGraduate === currentUser?.yearOfGraduate;
+                return msg?.yearOfGraduate === currentUser[0]?.yearOfGraduate;
             })
         }
     }
