@@ -18,7 +18,7 @@ const NewUserLandingPage = (props) => {
         return <Navigate replace to={'/signin'}/>
     }
     if (users && !users[handle]?.isNewUser){
-        return <Navigate replace to={'/'}/>
+        return <Navigate replace to={'/reset-password/new-user'}/>
     }
 
 
