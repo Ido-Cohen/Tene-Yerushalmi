@@ -74,7 +74,7 @@ const SignInT = (props) => {
 
                     <div className="flex items-center justify-end pt-5">
                         <div className="text-sm">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 text-right">
+                            <a href="/forgot-password" className="font-medium text-indigo-600 hover:text-indigo-500 text-right">
                                 ?שכחת סיסמה
                             </a>
                         </div>

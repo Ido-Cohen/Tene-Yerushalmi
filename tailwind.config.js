@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./public/index.html","./src/**/*.{js,jsx,ts,tsx}",'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {},
   },
@@ -9,5 +9,7 @@ module.exports = {
       // strategy: 'base', // only generate global styles
       strategy: 'class', // only generate classes
     })
+    require("@tailwindcss/forms"),
+    require('flowbite/plugin')
   ],
 }

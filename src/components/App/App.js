@@ -15,6 +15,10 @@ import SignUpT from "../Auth/SignUpT";
 import AddGroupT from "../Auth/addGroupT";
 import CreateMessageT from "../Messages/CreateMessageT";
 import ContactsListT from '../Contacts/contactListT'
+import Example from "../layout/example";
+import {Footer} from "flowbite-react";
+import NewUserLandingPage from  "../Auth/NewUserLandingPage";
+import ResetPassword from "../Auth/ResetPassword";
 
 
 const App = () => {
@@ -32,7 +36,25 @@ const App = () => {
                     <Route path={"/settings"} element={<Settings/>}/>
                     <Route path={"/maps"} element={<MapDashboard/>}/>
                     <Route path={"/contacts"} element={<ContactsListT/>}/>
+                    <Route path={"/contacts"} element={<ContactsList/>}/>
+                    <Route path={"/reset-password/new-user"} element={<NewUserLandingPage/>}/>
+                    <Route path={"/forgot-password"} element={<ResetPassword/>}/>
                 </Routes>
+                <Footer className={"fixed bottom-0 left-0 w-full"}>
+                    <Footer.Copyright
+                        href="https://tenejlm.co.il/"
+                        by="TeneJLM™"
+                        year={2022}
+                    />
+                    <Footer.LinkGroup className="mt-3 flex-wrap items-center text-sm sm:mt-0">
+                        <Footer.Link href="https://tenejlm.co.il/">
+                            About
+                        </Footer.Link>
+                        <Footer.Link href="https://tenejlm.co.il/contacts/">
+                            Contact
+                        </Footer.Link>
+                    </Footer.LinkGroup>
+                </Footer>
             </div>
         </Router>
 

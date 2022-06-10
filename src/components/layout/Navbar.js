@@ -4,10 +4,18 @@ import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
 import {connect} from "react-redux";
 import M from  'materialize-css/dist/js/materialize.min.js';
+import NewUserLinks from "./NewUserLinks";
 
 const Navbar = (props) => {
-    const {auth,profile} = props;
-    const links = auth.uid ? <SignInLinks profile={profile}/> : <SignOutLinks/>
+    const {auth,profile,users,handle} = props;
+    // let links = auth.uid ? (users[handle].isNewUser ? <NewUserLinks profile={profile}/> :<SignInLinks profile={profile}/>) : <SignOutLinks/>
+    let links = <SignOutLinks/>;
+    if(auth.uid){
+        links = <SignInLinks profile={profile}/>;
+        if (users && users[handle].isNewUser){
+            links = <NewUserLinks profile={profile}/>;
+        }
+    }
     useEffect(() => {
         let sidenav = document.querySelector('#slide-out');
         M.Sidenav.init(sidenav, {});
@@ -23,12 +31,15 @@ const Navbar = (props) => {
               {links}
           </div>
       </nav>
+
   );
 }
 const mapStateToProps = (state) => {
   return{
       auth: state.firebase.auth,
-      profile: state.firebase.profile
+      profile: state.firebase.profile,
+      users: state.firestore.data.users,
+      handle:state.auth.handle
   }
 }
 export default connect(mapStateToProps)(Navbar);

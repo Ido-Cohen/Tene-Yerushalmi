@@ -24,14 +24,14 @@ function Map() {
     const [selected, setSelected] = useState(null);
 
     const center = useMemo(() => ({lat: 31.4117257, lng: 35.0818155}),[]);
-    return (<>
-        <div className={"places-container"}>
+    return (<div className={"overflow-x-auto "}>
+        <div className={"container"}>
             <PlacesAutoComplete setSelected={setSelected}/>
         </div>
         <GoogleMap zoom={10} center={center} mapContainerStyle={{width: '100%', height: '100vh'}}>
             {selected && <Marker position={selected}/>}
     </GoogleMap>
-        </>
+        </div>
 
     );
 }
@@ -61,4 +61,5 @@ const PlacesAutoComplete = ({setSelected}) => {
         </ComboboxPopover>
     </Combobox>
 }
+
 export default MapDashboard;

@@ -5,7 +5,7 @@ const contactSummary = ({user}) => {
         <div>
             <div className={"card z-depth-0 project-summary"}>
                 <div className={"card-content grey-text text-darken-3"}>
-                    <span className={"card-title left-align"}>{user.firstName +" " + user.lastName}</span>
+                    <span className={"card-title right-align"}>{user.firstName +" " + user.lastName}</span>
                     <p className={"left-align"}>Email: {user.email}</p>
 
                 </div>

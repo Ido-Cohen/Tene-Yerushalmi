@@ -4,11 +4,12 @@ import {firestoreConnect} from "react-redux-firebase";
 import {compose} from "redux";
 import withRouter from './withRouter';
 import {Navigate, useNavigate} from "react-router";
-import moment from "moment";
+import moment from "moment/min/moment-with-locales";
 import {deleteMessage} from "../../store/actions/messageActions";
+moment.locale('he')
 
 const MessageDetails = (props) => {
-    const {message, auth} = props;
+    const {message, auth,isAdmin} = props;
     const navigate = useNavigate();
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
@@ -21,7 +22,7 @@ const MessageDetails = (props) => {
 
     if (message) {
         return (
-            <div className={"container section message-details"}>
+            <div className={"container section message-details right-align"}>
                 <div className={"card z-depth-0"}>
                     <div className={"card-content"}>
                         <span className="card-title">{message.title}</span>
@@ -31,10 +32,10 @@ const MessageDetails = (props) => {
                         <div>Posted by {message.authorFirstName} {message.authorLastName}</div>
                         <div>{moment(message.createdAt.toDate()).calendar()}</div>
                     </div>
-                    <div className="card-action">
-                        <a onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
+                    <div className="card-action left-align">
+                        {isAdmin ? <a onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
                             <i className="medium material-icons">delete</i>
-                        </a>
+                        </a> : ''}
                     </div>
                 </div>
             </div>
@@ -58,7 +59,8 @@ const mapStateToProps = (state, ownProps) => {
     const message = messages ? messages[id] : null;
     return {
         message: message,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        isAdmin:state.auth.isAdmin
     }
 }
 const mapDispatchToProps = (dispatch) => {

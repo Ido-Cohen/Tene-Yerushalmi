@@ -1,6 +1,3 @@
-import {getFirebase} from "react-redux-firebase";
-import {getFirestore} from "redux-firestore";
-
 
 export const createMessage = (message) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
@@ -11,6 +8,7 @@ export const createMessage = (message) => {
             ...message,
             authorFirstName: profile.firstName,
             authorLastName: profile.lastName,
+            yearOfGraduate:profile.yearOfGraduate,
             authorId: authorId,
             createdAt: new Date()
         }).then(() => {

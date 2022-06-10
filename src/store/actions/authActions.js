@@ -1,4 +1,6 @@
+import firebase from "firebase/compat/app";
 
+import getAuth from '@firebase/auth';
 export const signIn = (credentials) => {
   return (dispatch,getState,{getFirebase}) => {
       const firebase = getFirebase();
@@ -44,4 +46,54 @@ export const signUp = (newUser) => {
           dispatch({type:'SIGNUP_ERROR',err})
       })
   }
+}
+
+export const setIsNewUser = (uid) => {
+    return (dispatch,getState,{getFirebase,getFirestore}) => {
+        const firestore = getFirestore();
+        console.log(uid);
+        firestore.collection('users').doc(uid).update({isNewUser:false})
+            .then(() => {
+                dispatch({type: "CHANGED"})
+            })
+            .catch((err) => {
+                dispatch({type: "ERROR", err})
+            });
+    }
+}
+
+const reauthenticate = (currentPassword) => {
+    var user = firebase.auth().currentUser;
+    var cred = firebase.auth.EmailAuthProvider.credential(
+        user.email, currentPassword);
+    return user.reauthenticateWithCredential(cred);
+}
+
+export const changePassword = async (currentPassword, newPassword) => {
+    let passwordChanged = false;
+    await reauthenticate(currentPassword).then(() => {
+        var user = firebase.auth().currentUser;
+        user.updatePassword(newPassword).then(() => {
+            console.log("Password updated!");
+            passwordChanged = true;
+        }).catch((error) => {
+            console.log(error.message);
+        });
+    }).catch((error) => {
+        console.log(error.message);
+    });
+    return passwordChanged;
+}
+
+export const changeEmail = (currentPassword, newEmail) => {
+    reauthenticate(currentPassword).then(() => {
+        var user = firebase.auth().currentUser;
+        user.updateEmail(newEmail).then(() => {
+            console.log("Email updated!");
+        }).catch((error) => { console.log(error); });
+    }).catch((error) => { console.log(error); });
+}
+
+export const passwordReset = (email) => {
+    return firebase.auth().sendPasswordResetEmail(email);
 }
