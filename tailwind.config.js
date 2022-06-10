@@ -8,7 +8,7 @@ module.exports = {
     require("@tailwindcss/forms")({
       // strategy: 'base', // only generate global styles
       strategy: 'class', // only generate classes
-    })
+    }),
     require("@tailwindcss/forms"),
     require('flowbite/plugin')
   ],
