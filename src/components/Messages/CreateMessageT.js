@@ -51,7 +51,7 @@ const CreateMessageT = (props) => {
         }]);
     }
 
-    if (yearData === null) {
+    if (!yearData) {
         getYear().then(res => {
         });
     }

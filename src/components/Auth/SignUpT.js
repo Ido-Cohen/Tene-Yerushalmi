@@ -11,6 +11,8 @@ import {connect} from "react-redux";
 import axios from "axios";
 import log from "tailwindcss/lib/util/log";
 import {data} from "autoprefixer";
+import {useLoadScript} from "@react-google-maps/api";
+import {PlacesAutoComplete} from "../Maps/mapDashboard";
 
 const chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const passwordLength = 6;
@@ -24,8 +26,13 @@ const valueForAdmin = [{
         label: 'מנהל'
     }]
 const SignUpT = (props) => {
+    const {isLoaded} = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
+        libraries : ['places']
+    })
     const {auth, authError,isAdmin} = props;
     const [yearData, setYearData] = useState(null);
+    const [selected, setSelected] = useState();
     const [state, setState] = useState({
         email: '',
         password: generatePassword(),
@@ -39,18 +46,19 @@ const SignUpT = (props) => {
         isNewUser: true,
         isNewYear: false
     });
+    if (!isLoaded) return <div>Loading...</div>;
 
     async function getYear() {
         const response = await axios.get('/getallyears');
         setYearData(response.data);
     }
-
+    if (!yearData){
+        getYear().then(res => {
+            console.log(res);
+        });
+    }
     const handleAdminDropdown = (event) => {
-        if (!event){
-            getYear().then(res => {
-                console.log(res);
-            });
-        }
+
         setState(prevState => ({
             ...prevState,
             'isAdmin': event !== false,
@@ -68,14 +76,17 @@ const SignUpT = (props) => {
     };
     const handleSubmit = (e, signUp) => {
         e.preventDefault();
-        // sendEmail();
-        // signUp(state);
         console.log(state)
-        axios.post('/sendemail',{email:state.email,password: state.password}).then(email => {
-            console.log("email sent successfully")
-        })
+
         axios.post("/signup", state)
-            .then((res) => console.log(res))
+            .then((res) => {
+                console.log(res)
+                axios.post('/sendemail',{email:state.email,password: state.password}).then(email => {
+                    console.log("email sent successfully")
+                })
+            }).catch(err => {
+            console.log(err);
+        })
     }
     const handleChange = (e) => {
         setState(prevState => ({
@@ -130,13 +141,7 @@ const SignUpT = (props) => {
                                onChange={(e) => {
                                    handleChange(e)
                                }}/>
-                        <input type="text" id={"address"}
-                               className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
-                               name="address"
-                               placeholder="כתובת מגורים"
-                               onChange={(e) => {
-                                   handleChange(e)
-                               }}/>
+                        <PlacesAutoComplete setSelected={setSelected}/>
                         <input type="text" id={"work"}
                                className="block border border-grey-light w-full p-3 rounded mb-4 text-right" name="work"
                                placeholder="עבודה"

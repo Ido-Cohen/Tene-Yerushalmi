@@ -14,9 +14,9 @@ const Dropdown = (props) => {
             reference(event.target.value);
     };
     return (
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: 120}} >
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">{type}</InputLabel>
+                <InputLabel id="demo-simple-select-label" >{type}</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -26,7 +26,7 @@ const Dropdown = (props) => {
                 >
                     {values && values.map((num) => {
                         return (
-                            <MenuItem value={num.value} style={{justifyContent: "right"}} key={num.value}>{num.label}</MenuItem>)
+                            <MenuItem value={num.value} style={{justifyContent: "right"}} key={num.label}>{num.label}</MenuItem>)
                     })}
                 </Select>
             </FormControl>

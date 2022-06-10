@@ -4,12 +4,14 @@ import {firestoreConnect} from "react-redux-firebase";
 import {compose} from "redux";
 import withRouter from './withRouter';
 import {Navigate, useNavigate} from "react-router";
-import moment from "moment";
+import moment from "moment/min/moment-with-locales";
 import {deleteMessage} from "../../store/actions/messageActions";
 import Avatar from "@mui/material/Avatar";
 import {red} from "@mui/material/colors";
+moment.locale('he')
 
-const MessageDetails = (props) => {
+
+const MessageDetailsT = (props) => {
     const {message, auth} = props;
     const navigate = useNavigate();
     if (!auth.uid) {
@@ -30,7 +32,7 @@ const MessageDetails = (props) => {
                     <div className={"flex items-center flex-row-reverse mb-1 ml-1"}>
 
                         <Avatar sx={{ bgcolor: red[500], marginLeft: 2, marginRight: 2}} aria-label="recipe">
-                            BN
+                            {message.authorFirstName[0] + message.authorLastName[0]}
                         </Avatar>
 
                         <h1 className="text-2xl font-semibold mr-4">{message.title}</h1>
@@ -40,7 +42,7 @@ const MessageDetails = (props) => {
                 {/* Button for opening card */}
 
                 <div className={"w-80 flex-"}>
-                    <div>Posted by {message.authorFirstName} {message.authorLastName}</div>
+                    <div>פורסם על ידי {message.authorFirstName} {message.authorLastName}</div>
                     <div>{moment(message.createdAt.toDate()).calendar()}</div>
                 </div>
         </div>
@@ -48,11 +50,7 @@ const MessageDetails = (props) => {
             <div className="w-full flex flex-col mt-8 text-right mb-4 border-y-gray-200 border-gray-700">
                 <hr className="mb-4 border-gray-700" />
                 <p className={"text-right"}>
-                    בירושלים ישודרגו קווים מרכזיים המחברים בין השכונות למרכז העיר ולמרכזי פנאי ועסקים, בעוד שבגוש דן יופעלו מספר קווים חדשים ותתוגבר פעילות קווים קיימים. גם באשדוד יופעלו שני קווים עירוניים חדשים ובקווים אחרים ישונה המסלול ותתוגבר התדירות. באשקלון ישודרגו שלושה קווים בינעירוניים ובגליל יופעלו שני קווים חדשים ומהירים בין עכו לחיפה ובין חיפה לצפת. רשימת כלל הקווים החדשים והמשודרגים מופיעה באתר משרד התחבורה.
-
-                    יש להזכיר כי שדרוג הפעילות מגיע דווקא בזמן שנהגי חברות התחבורה הציבורית השונות מאיימים להמשיך ולהשבית את השירות לפחות למשך שלוש שעות בכל יום שני, כחלק מהמאבק להעלאת שכרם.
-
-                    לדברי שרת התחבורה והבטיחות בדרכים, ח"כ מרב מיכאלי: "כל קו אוטובוס חדש הוא פחות רכבים פרטיים על הכביש. צעד אחר צעד נטה את היחס לטובת התח
+                    {message.content}
                 </p>
 
                 <hr className="mt-4 border-gray-700" />
@@ -60,7 +58,7 @@ const MessageDetails = (props) => {
 
         <div className="card-action border-gray-700"><a onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
 
-            <i className="medium material-icons">delete</i>
+            <i className="medium material-icons hover:text-gray-600">delete</i>
 
         </a></div>
     </div>
@@ -97,6 +95,6 @@ export default compose(withRouter,
     connect(mapStateToProps, mapDispatchToProps), firestoreConnect([
         {collection: 'messages'}
     ])
-)(MessageDetails);
+)(MessageDetailsT);
 
 

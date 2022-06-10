@@ -13,13 +13,15 @@ let passError = '';
 const NewUserLandingPage = (props) => {
 
     const {authError, auth, users, handle} = props;
-    console.log(handle);
+    console.log(users);
     if (!auth.uid || !users) {
         return <Navigate replace to={'/signin'}/>
     }
-    // if (!users[auth.uid].isNewUser){
-    //     return <Navigate replace to={'/'}/>
-    // }
+    if (users && !users[handle]?.isNewUser){
+        return <Navigate replace to={'/'}/>
+    }
+
+
 
     return (
         <div className={"container"}>

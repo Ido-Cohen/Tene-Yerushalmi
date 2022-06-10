@@ -19,6 +19,7 @@ import Example from "../layout/example";
 import {Footer} from "flowbite-react";
 import NewUserLandingPage from  "../Auth/NewUserLandingPage";
 import ResetPassword from "../Auth/ResetPassword";
+import DashboardT from "../Dashboard/DashboardT";
 
 
 const App = () => {
@@ -27,7 +28,7 @@ const App = () => {
             <div className="App">
                 <Navbar/>
                 <Routes>
-                    <Route exact path={"/"} element={<Dashboard/>} />
+                    <Route exact path={"/"} element={<DashboardT/>} />
                     <Route path={"/message/:id"} element={<MessageDetails/>} />
                     <Route path={"/signin"} element={<SignInT/>} />
                     <Route path={"/signup"} element={<SignUpT/>} />
