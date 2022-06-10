@@ -1,15 +1,15 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import './App.css';
-import Dashboard from "../Dashboard/Dashboard";
+import Dashboard from "../Dashboard/DashboardT";
 import Navbar from "../layout/Navbar";
-import MessageDetails from "../Messages/MessageDetails";
+import MessageDetails from "../Messages/MessageDetailsT";
 import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
 import AddGroup from "../Auth/addGroup";
 import CreateMessage from "../Messages/CreateMessage";
 import Settings from "../Settings/Settings";
 import MapDashboard from "../Maps/mapDashboard";
-import ContactsList from  "../Contacts/contactList";
+import ContactsList from  "../Contacts/contactListT";
 import SignInT from "../Auth/SignInT";
 import SignUpT from "../Auth/SignUpT";
 import AddGroupT from "../Auth/addGroupT";
