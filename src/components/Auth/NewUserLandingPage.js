@@ -17,12 +17,12 @@ const NewUserLandingPage = (props) => {
     if (!auth.uid || !users) {
         return <Navigate replace to={'/signin'}/>
     }
-    if (users && !users[handle]?.isNewUser){
+    if (users && users[handle]?.isNewUser){
         return <Navigate replace to={'/reset-password/new-user'}/>
     }
-
-
-
+    if (users && !users[handle]?.isNewUser){
+        return <Navigate replace to={'/'}/>
+    }
     return (
         <div className={"container"}>
             <h4 className={"center-align grey-text text-darken-3"}>
