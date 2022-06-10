@@ -11,6 +11,9 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import Dropdown from "../Auth/Dropdown";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {firestoreConnect} from "react-redux-firebase";
 
 const cities = [
     {value: {lat: 31.7833, lng: 35.2167}, label: 'ירושלים'},
@@ -20,18 +23,20 @@ const cities = [
     {value: {lat: 29.55805, lng: 34.94821}, label: 'אילת'},
     {value: {lat: 33.20733, lng: 35.57212}, label: 'קרית שמונה'},
 ]
-const MapDashboard = () => {
+const MapDashboard = (props) => {
     const {isLoaded} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
         libraries: ['places']
 
     })
+    const{users} = props;
     const [state, setState] = useState({lat: '', lin: ''});
     if (!isLoaded) return <div>Loading...</div>;
-    return <Map/>
+    return <Map users={users}/>
 };
 
-function Map() {
+function Map(props) {
+    const {users} = props;
     const [selected, setSelected] = useState(null);
     const center = useMemo(() => ({lat: 31.4117257, lng: 35.0818155}), []);
     const [newCenter, setNewCenter] = useState();
@@ -47,6 +52,9 @@ function Map() {
             </div>
             <GoogleMap zoom={11} center={newCenter ? newCenter : center}
                        mapContainerStyle={{width: '100%', height: '100vh'}}>
+                {users && users.map(user => {
+                    return <Marker position={user?.address}/>
+                })}
                 {/*{selected && <Marker position={selected}/>}*/}
             </GoogleMap>
         </div>
@@ -83,4 +91,19 @@ export const PlacesAutoComplete = ({setSelected}) => {
         </ComboboxPopover>
     </Combobox>
 }
-export default MapDashboard;
+const mapStateToProps = (state) => {
+    return {
+        authError: state.auth.authError,
+        auth: state.firebase.auth,
+        users: state.firestore.ordered.users,
+        handle: state.auth.handle
+    }
+}
+export default compose(connect(mapStateToProps), firestoreConnect([
+    {
+        collection: 'messages'
+
+    }, {
+        collection: 'users'
+    }
+]))(MapDashboard);
