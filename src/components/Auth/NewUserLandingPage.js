@@ -24,7 +24,7 @@ const NewUserLandingPage = (props) => {
         return <Navigate replace to={'/'}/>
     }
     return (
-        <div className={"container"}>
+        <div className={"container pt-5"}>
             <h1 className={"center-align grey-text text-darken-3"}>
                 שלום {users[handle]?.firstName}, ברוכים הבאים לאפליקציית הבוגרים של טנא ירושלמי
             </h1>

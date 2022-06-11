@@ -26,7 +26,8 @@ const cities = [
 ]
 const MapDashboard = (props) => {
     const {auth,users,currentUser} =props;
-    if (!auth.uid || !currentUser.isAdmin) {
+
+    if (!auth.uid || !currentUser?.isAdmin) {
         return <Navigate replace to={'/'}/>
     }
     return <Map users={users}/>
@@ -103,7 +104,7 @@ const mapStateToProps = (state) => {
         });
     }
     return {
-        currentUser:user[0],
+        currentUser:user? user[0] : undefined,
         authError: state.auth.authError,
         auth: state.firebase.auth,
         users: state.firestore.ordered.users,

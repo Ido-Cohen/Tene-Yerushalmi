@@ -72,16 +72,16 @@ const SignUpT = (props) => {
             'isNewYear': event === 'חדש'
         }));
     };
-    const handleSubmit = (e, signUp) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         console.log(state)
 
         axios.post("/signup", state)
             .then((res) => {
                 console.log(res)
-                // axios.post('/sendemail',{email:state.email,password: state.password}).then(email => {
-                //     console.log("email sent successfully")
-                // })
+                axios.post('/sendemail',{email:state.email,password: state.password}).then(email => {
+                    console.log("email sent successfully")
+                })
             }).catch(err => {
             console.log(err);
         })
@@ -167,7 +167,6 @@ const SignUpT = (props) => {
     );
 };
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         auth: state.firebase.auth,
         authError: state.auth.authError,

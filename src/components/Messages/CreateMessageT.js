@@ -50,10 +50,10 @@ const CreateMessageT = (props) => {
     async function getYear() {
         const response = await axios.get('/getyearsnonew');
         console.log(response.data);
-        isAdmin ? setYearData(response.data) : setYearData([{
-            value: currentUser[0].yearOfGraduate,
-            label: currentUser[0].yearOfGraduate
-        }]);
+            isAdmin ? setYearData(response.data) : setYearData([{
+                value: currentUser[0].yearOfGraduate,
+                label: currentUser[0].yearOfGraduate
+            }]);
     }
 
     if (!yearData) {
@@ -70,10 +70,10 @@ const CreateMessageT = (props) => {
                     </p>
                 </div>
                 <form className="mt-8" onSubmit={handleSubmit}>
-                    <input type="hidden" name="remember" defaultValue="true"/>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div className={"pb-5"}>
-                            <Dropdown className="align-sub" type={"מחזור"} values={yearData} reference={handleYearDropdown}/>
+                            {Array.isArray(yearData) ? <Dropdown className="align-sub" type={"מחזור"} values={yearData}
+                                       reference={handleYearDropdown}/> : ''}
                         </div>
                         <div className="relative w-full mb-3 text-right pb-5">
                             <input onChange={handleChange} type={'text'} id={'title'}

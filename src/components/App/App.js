@@ -29,33 +29,33 @@ const App = () => {
                 <Navbar/>
                 <Routes>
                     <Route exact path={"/"} element={<DashboardT/>} />
-                    <Route path={"/message/:id"} element={<MessageDetails/>} />
-                    <Route path={"/userProfile/:id"} element={<UserDetails/>} />
-                    <Route path={"/signin"} element={<SignInT/>} />
-                    <Route path={"/signup"} element={<SignUpT/>} />
-                    <Route path={"/add"} element={<AddGroupT/>} />
-                    <Route path={"/create"} element={<CreateMessageT/>}/>
-                    <Route path={"/settings"} element={<Settings/>}/>
-                    <Route path={"/maps"} element={<MapDashboard/>}/>
-                    <Route path={"/contacts"} element={<ContactsListT/>}/>
-                    <Route path={"/reset-password/new-user"} element={<NewUserLandingPage/>}/>
-                    <Route path={"/forgot-password"} element={<ResetPassword/>}/>
+                    <Route exact path={"/message/:id"} element={<MessageDetails/>} />
+                    <Route exact path={"/userProfile/:id"} element={<UserDetails/>} />
+                    <Route exact path={"/signin"} element={<SignInT/>} />
+                    <Route exact path={"/signup"} element={<SignUpT/>} />
+                    <Route exact path={"/add"} element={<AddGroupT/>} />
+                    <Route exact path={"/create"} element={<CreateMessageT/>}/>
+                    <Route exact path={"/settings"} element={<Settings/>}/>
+                    <Route exact path={"/maps"} element={<MapDashboard/>}/>
+                    <Route exact path={"/contacts"} element={<ContactsListT/>}/>
+                    <Route exact path={"/reset-password/new-user"} element={<NewUserLandingPage/>}/>
+                    <Route exact path={"/forgot-password"} element={<ResetPassword/>}/>
                 </Routes>
-                <Footer className={"fixed bottom-0 left-0 w-full"}>
-                    <Footer.Copyright
-                        href="https://tenejlm.co.il/"
-                        by="TeneJLM™"
-                        year={2022}
-                    />
-                    <Footer.LinkGroup className="mt-3 flex-wrap items-center text-sm sm:mt-0 ">
-                        <Footer.Link href="https://tenejlm.co.il/">
-                            About
-                        </Footer.Link>
-                        <Footer.Link href="https://tenejlm.co.il/contacts/">
-                            Contact
-                        </Footer.Link>
-                    </Footer.LinkGroup>
-                </Footer>
+                {/*<Footer className={"fixed bottom-0 left-0 w-full"}>*/}
+                {/*    <Footer.Copyright*/}
+                {/*        href="https://tenejlm.co.il/"*/}
+                {/*        by="TeneJLM™"*/}
+                {/*        year={2022}*/}
+                {/*    />*/}
+                {/*    <Footer.LinkGroup className="mt-3 flex-wrap items-center text-sm sm:mt-0 ">*/}
+                {/*        <Footer.Link href="https://tenejlm.co.il/">*/}
+                {/*            About*/}
+                {/*        </Footer.Link>*/}
+                {/*        <Footer.Link href="https://tenejlm.co.il/contacts/">*/}
+                {/*            Contact*/}
+                {/*        </Footer.Link>*/}
+                {/*    </Footer.LinkGroup>*/}
+                {/*</Footer>*/}
             </div>
         </Router>
 

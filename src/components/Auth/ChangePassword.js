@@ -26,9 +26,10 @@ const ChangePassword = (props) => {
     const [isValidPassword, setIsValidPassword] = useState(false);
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
+    const [work, setWork] = useState('');
     const [currPassword, setCurrPassword] = useState('');
-    const [selected, setSelected] = useState();
-    const [selectedAddress, setSelectedAddress] = useState();
+    const [selected, setSelected] = useState('');
+    const [selectedAddress, setSelectedAddress] = useState('');
     const {authError,auth,users,setIsNewUser,signOut,handle} = props;
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
@@ -39,7 +40,7 @@ const ChangePassword = (props) => {
     function handleSubmit(e) {
         e.preventDefault();
         if (isValidPassword){
-            axios.post('/updateuser',{handle:handle,password:password1 ,address:selectedAddress,geoAddress:selected}).then(result => {
+            axios.post('/api/updateuser',{handle:handle,password:password1 ,address:selectedAddress,geoAddress:selected,work}).then(result => {
                 return <Navigate replace to={'/'}/>
             }).catch(err => {
                 console.log(err);
@@ -135,6 +136,7 @@ const ChangePassword = (props) => {
                                className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
                                name="work"
                                placeholder="עבודה"
+                               onChange={(e) => {setWork(e.target.value)}}
                         />
                         <div className={"red-text center"}>
                             {passError.length !== 0 ? <p>{passError}</p> : ''}
