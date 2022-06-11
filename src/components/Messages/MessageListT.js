@@ -103,7 +103,7 @@ const MessageListT = ({messages}) => {
             </div>
 
 
-            <div style={{height: 755}} className={"message-list section bg-white/90 overflow-y-scroll px-20 py-10 grid md:grid-cols-4  sm:grid-cols-2 gap-5 flex"}>
+            <div style={{height: 755, display: "flex"}} className={"message-list section flex-row-reverse bg-white/90 overflow-y-scroll px-20 py-10 grid md:grid-cols-4  sm:grid-cols-2 gap-5 flex"}>
                 {messageList && messageList.map(message => {
                     return (
                         <Link to={"/message/" + message.id} key={message.id}>
