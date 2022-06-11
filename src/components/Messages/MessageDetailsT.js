@@ -25,7 +25,7 @@ const MessageDetailsT = (props) => {
 
     if (message) {
         return (
-        <div className="shadow-md bg-gray-800 text-gray-200 m-8 p-6 rounded" x-data="{open: false}">
+        <div className="shadow-md bg-white/90 text-black m-8 p-6 rounded" x-data="{open: false}">
             <div className="flex items-center flex-row-reverse justify-between">
 
                 <div className="flex items-center flex-row-reverse">
@@ -56,7 +56,7 @@ const MessageDetailsT = (props) => {
                 <hr className="mt-4 border-gray-700" />
         </div>
 
-            {isAdmin ? <div className="card-action border-gray-700"><a
+            {isAdmin ? <div className="card-action border-gray-700 text-gray-400"><a
                 onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
 
                 <i className="medium material-icons hover:text-gray-600">delete</i>
