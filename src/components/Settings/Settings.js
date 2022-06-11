@@ -26,10 +26,16 @@ const columns = [
 ];
 
 const Settings = (props) => {
-    const {auth, profile, users} = props;
+    const {auth, profile, users,currentUser} = props;
+    console.log(auth)
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }
+    if (currentUser.isAdmin ===false){
+        return <Navigate replace to={'/'}/>
+
+    }
+
     if (!isLoaded(users)) return (<div>
         <div className="preloader-wrapper big active">
             <div className="spinner-layer spinner-blue-only">
@@ -103,7 +109,15 @@ const Settings = (props) => {
     );
 };
 const mapStateToProps = (state) => {
+    const users = state.firestore.ordered.users;
+    let user;
+    if (users) {
+        user = users.filter(user => {
+            return user.handle === state.auth.handle;
+        });
+    }
     return {
+        currentUser:user[0],
         auth: state.firebase.auth,
         profile: state.firebase.profile,
         users: state.firestore.ordered.users
