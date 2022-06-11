@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import MessageList from "../Messages/MessageListT";
-import {connect} from "react-redux";
-import {firestoreConnect} from "react-redux-firebase";
+import {connect, useSelector} from "react-redux";
+import {firestoreConnect, isLoaded} from "react-redux-firebase";
 import {compose} from "redux";
 import {Navigate} from "react-router";
 import MessageListT from "../Messages/MessageListT";
@@ -9,6 +9,24 @@ import MessageListT from "../Messages/MessageListT";
 const DashboardT = (props) => {
 
     const {messages, auth, currentUser, isAdmin} = props;
+    const checkStore = useSelector(state => state.firestore.ordered.users)
+    if (!isLoaded(checkStore)){
+        return (<div>
+            <div className="preloader-wrapper big active">
+                <div className="spinner-layer spinner-blue-only">
+                    <div className="circle-clipper left">
+                        <div className="circle"/>
+                    </div>
+                    <div className="gap-patch">
+                        <div className="circle"/>
+                    </div>
+                    <div className="circle-clipper right">
+                        <div className="circle"/>
+                    </div>
+                </div>
+            </div>
+        </div>);
+    }
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }

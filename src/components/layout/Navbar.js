@@ -2,24 +2,45 @@ import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import M from  'materialize-css/dist/js/materialize.min.js';
 import NewUserLinks from "./NewUserLinks";
+import {isLoaded} from "react-redux-firebase";
 
 const Navbar = (props) => {
-    const {auth,profile,users,handle} = props;
-    // let links = auth.uid ? (users[handle].isNewUser ? <NewUserLinks profile={profile}/> :<SignInLinks profile={profile}/>) : <SignOutLinks/>
-    let links = <SignOutLinks/>;
-    if(auth.uid){
-        links = <SignInLinks profile={profile}/>;
-        if (users && users[handle].isNewUser){
-            links = <NewUserLinks profile={profile}/>;
-        }
-    }
+    const {auth,users,handle} = props;
     useEffect(() => {
         let sidenav = document.querySelector('#slide-out');
         M.Sidenav.init(sidenav, {});
     })
+    const checkStore = useSelector(state => state.firestore.ordered.users)
+    if (!isLoaded(checkStore)){
+        return (<div>
+            <div className="preloader-wrapper big active">
+                <div className="spinner-layer spinner-blue-only">
+                    <div className="circle-clipper left">
+                        <div className="circle"/>
+                    </div>
+                    <div className="gap-patch">
+                        <div className="circle"/>
+                    </div>
+                    <div className="circle-clipper right">
+                        <div className="circle"/>
+                    </div>
+                </div>
+            </div>
+        </div>);
+    }
+    // let links = auth.uid ? (users[handle].isNewUser ? <NewUserLinks profile={profile}/> :<SignInLinks profile={profile}/>) : <SignOutLinks/>
+
+    let links = <SignOutLinks/>;
+    if(auth.uid){
+        links = <SignInLinks profile={users[handle].isNewUser}/>;
+        if (users && users[handle].isNewUser){
+            links = <NewUserLinks profile={users[handle].isNewUser}/>;
+        }
+    }
+
 
   return(
 
@@ -37,9 +58,9 @@ const Navbar = (props) => {
 const mapStateToProps = (state) => {
   return{
       auth: state.firebase.auth,
-      profile: state.firebase.profile,
       users: state.firestore.data.users,
-      handle:state.auth.handle
+      handle:state.auth.handle,
+      isAdmin:state.auth.isAdmin
   }
 }
 export default connect(mapStateToProps)(Navbar);

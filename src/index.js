@@ -19,6 +19,7 @@ import registerServiceWorker from './registerServiceWorker';
 import AppLogout from "./components/Auth/Logout";
 import store, {Persistor} from "./store/reducers/store";
 import {PersistGate} from 'redux-persist/integration/react'
+import {useLoadScript} from "@react-google-maps/api";
 
 //
 // const store = createStore(
@@ -64,10 +65,14 @@ function AuthIsLoaded({children}) {
     </div>);
     return children
 }
+function MapIsLoaded({children}) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const {isLoaded} = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
+        libraries: ['places']
 
-function StoreIsLoaded({children}) {
-    const auth = useSelector(state => state.firestore)
-    if (!isLoaded(auth)) return (<div>
+    })
+    if (!isLoaded) return (<div>
         <div className="preloader-wrapper big active">
             <div className="spinner-layer spinner-blue-only">
                 <div className="circle-clipper left">
@@ -90,13 +95,15 @@ ReactDOM.render(
 
         <ReactReduxFirebaseProvider {...rrfProps}>
             <AuthIsLoaded>
-                <StoreIsLoaded>
+                <MapIsLoaded>
+
                     <AppLogout>
                         <PersistGate Loading={null} persistor={Persistor}>
                             <App/>
                         </PersistGate>
                     </AppLogout>
-                </StoreIsLoaded>
+                </MapIsLoaded>
+
             </AuthIsLoaded>
         </ReactReduxFirebaseProvider>
 

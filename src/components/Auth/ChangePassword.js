@@ -23,11 +23,6 @@ import {PlacesAutoComplete} from "../Maps/mapDashboard";
 
 let passError = '';
 const ChangePassword = (props) => {
-    const {isLoaded} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries : ['places']
-
-    })
     const [isValidPassword, setIsValidPassword] = useState(false);
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
@@ -35,7 +30,6 @@ const ChangePassword = (props) => {
     const [selected, setSelected] = useState();
     const [selectedAddress, setSelectedAddress] = useState();
     const {authError,auth,users,setIsNewUser,signOut,handle} = props;
-    if (!isLoaded) return <div>Loading...</div>;
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }
