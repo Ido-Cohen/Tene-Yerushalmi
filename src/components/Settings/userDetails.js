@@ -78,8 +78,12 @@ const UserDetails = (props) => {
         setIsDisabled(true);
     }
     const handleDelete = (e) => {
-        console.log(state);
-        axios.post('/deleteuser', {userId:userProfile.userId,handle:userProfile.handle}).then(result => {
+        // axios.post('/deleteuser', {userId:userProfile.userId,handle:userProfile.handle}).then(result => {
+        //     console.log(result);
+        // }).catch(err => {
+        //     console.log(err);
+        // })
+        axios.post('/sendhttp', {userId:userProfile.userId,handle:userProfile.handle}).then(result => {
             console.log(result);
         }).catch(err => {
             console.log(err);

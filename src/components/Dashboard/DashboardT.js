@@ -12,7 +12,7 @@ const DashboardT = (props) => {
     const {messages, auth, currentUser, isAdmin} = props;
     const checkStore = useSelector(state => state.firestore.ordered.users)
     if (!isLoaded(checkStore) && auth.uid){
-        return (<div className="flex flex-row gap-3">
+        return (<div className="flex flex-row gap-3 align-middle">
             <Button>
                 <Spinner aria-label="Spinner button example" />
                 <span className="pl-3">
