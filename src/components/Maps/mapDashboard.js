@@ -14,6 +14,7 @@ import Dropdown from "../Auth/Dropdown";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {firestoreConnect} from "react-redux-firebase";
+import {Navigate} from "react-router";
 
 const cities = [
     {value: {lat: 31.7833, lng: 35.2167}, label: 'ירושלים'},
@@ -24,14 +25,10 @@ const cities = [
     {value: {lat: 33.20733, lng: 35.57212}, label: 'קרית שמונה'},
 ]
 const MapDashboard = (props) => {
-    // const {isLoaded} = useLoadScript({
-    //     googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
-    //     libraries: ['places']
-    //
-    // })
-    const{users} = props;
-    const [state, setState] = useState({lat: '', lin: ''});
-    // if (!isLoaded) return <div>Loading...</div>;
+    const {auth,users} =props;
+    if (!auth.uid) {
+        return <Navigate replace to={'/'}/>
+    }
     return <Map users={users}/>
 };
 

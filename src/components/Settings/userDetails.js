@@ -8,7 +8,6 @@ import axios from "axios";
 import {PlacesAutoComplete} from "../Maps/mapDashboard";
 import Modal from "../layout/Modal";
 import {Navigate} from "react-router";
-
 const valueForAdmin = [{
     value: false,
     label: 'בוגר'
@@ -17,8 +16,10 @@ const valueForAdmin = [{
         value: true,
         label: 'מנהל'
     }]
+
 const UserDetails = (props) => {
-    const {isAdmin, userProfile, auth, currentUser} = props;
+    const {isAdmin, userProfile, auth, currentUser,token} = props;
+
 
     const [isDisabled, setIsDisabled] = useState(true);
     const [yearData, setYearData] = useState();
@@ -83,7 +84,8 @@ const UserDetails = (props) => {
         // }).catch(err => {
         //     console.log(err);
         // })
-        axios.post('/sendhttp', {userId:userProfile.userId,handle:userProfile.handle}).then(result => {
+
+        axios.post('/sendhttp', {token:token}).then(result => {
             console.log(result);
         }).catch(err => {
             console.log(err);
@@ -223,6 +225,7 @@ const UserDetails = (props) => {
 };
 
 const mapStateToProps = (state) => {
+    console.log(state);
     const loc = window.location.pathname;
     const handle = loc.substring(loc.lastIndexOf('/') + 1);
     const users = state.firestore.ordered.users;
@@ -241,9 +244,11 @@ const mapStateToProps = (state) => {
         userProfile: profile[0],
         currentUser: user[0],
         auth: state.firebase.auth,
-        isAdmin: state.auth.isAdmin
+        isAdmin: state.auth.isAdmin,
+        token:state.firebase.auth.stsTokenManager.accessToken
     }
 }
+
 export default compose(withRouter,
     connect(mapStateToProps), firestoreConnect([
         {collection: 'users'}

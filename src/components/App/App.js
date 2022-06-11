@@ -39,7 +39,6 @@ const App = () => {
                     <Route path={"/settings"} element={<Settings/>}/>
                     <Route path={"/maps"} element={<MapDashboard/>}/>
                     <Route path={"/contacts"} element={<ContactsListT/>}/>
-                    <Route path={"/contacts"} element={<ContactsList/>}/>
                     <Route path={"/reset-password/new-user"} element={<NewUserLandingPage/>}/>
                     <Route path={"/forgot-password"} element={<ResetPassword/>}/>
                 </Routes>
