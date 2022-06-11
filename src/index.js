@@ -17,7 +17,7 @@ import fbConfig from "./config/fbConfig";
 import firebase from "firebase/compat/app";
 import registerServiceWorker from './registerServiceWorker';
 import AppLogout from "./components/Auth/Logout";
-import store,{Persistor} from "./store/reducers/store";
+import store, {Persistor} from "./store/reducers/store";
 import {PersistGate} from 'redux-persist/integration/react'
 
 //
@@ -65,16 +65,38 @@ function AuthIsLoaded({children}) {
     return children
 }
 
+function StoreIsLoaded({children}) {
+    const auth = useSelector(state => state.firestore)
+    if (!isLoaded(auth)) return (<div>
+        <div className="preloader-wrapper big active">
+            <div className="spinner-layer spinner-blue-only">
+                <div className="circle-clipper left">
+                    <div className="circle"/>
+                </div>
+                <div className="gap-patch">
+                    <div className="circle"/>
+                </div>
+                <div className="circle-clipper right">
+                    <div className="circle"/>
+                </div>
+            </div>
+        </div>
+    </div>);
+    return children
+}
+
 ReactDOM.render(
     <Provider store={store}>
 
         <ReactReduxFirebaseProvider {...rrfProps}>
             <AuthIsLoaded>
-                <AppLogout>
-                    <PersistGate Loading={null} persistor={Persistor}>
-                        <App/>
-                    </PersistGate>
-                </AppLogout>
+                <StoreIsLoaded>
+                    <AppLogout>
+                        <PersistGate Loading={null} persistor={Persistor}>
+                            <App/>
+                        </PersistGate>
+                    </AppLogout>
+                </StoreIsLoaded>
             </AuthIsLoaded>
         </ReactReduxFirebaseProvider>
 
