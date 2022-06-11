@@ -13,6 +13,7 @@ const Dropdown = (props) => {
         if (reference)
             reference(event.target.value);
     };
+    console.log(values);
     return (
         <Box sx={{ minWidth: 120}} >
             <FormControl fullWidth>

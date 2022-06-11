@@ -26,7 +26,7 @@ const cities = [
 ]
 const MapDashboard = (props) => {
     const {auth,users} =props;
-    if (!auth.uid) {
+    if (!auth.uid || !auth.isAdmin) {
         return <Navigate replace to={'/'}/>
     }
     return <Map users={users}/>
