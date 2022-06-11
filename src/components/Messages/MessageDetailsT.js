@@ -12,7 +12,7 @@ moment.locale('he')
 
 
 const MessageDetailsT = (props) => {
-    const {message, auth} = props;
+    const {message, auth ,isAdmin} = props;
     const navigate = useNavigate();
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
@@ -56,11 +56,12 @@ const MessageDetailsT = (props) => {
                 <hr className="mt-4 border-gray-700" />
         </div>
 
-        <div className="card-action border-gray-700"><a onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
+            {isAdmin ? <div className="card-action border-gray-700"><a
+                onClick={(e) => handleDelete(e, props.router.params.id, props.deleteMessage)}>
 
-            <i className="medium material-icons hover:text-gray-600">delete</i>
+                <i className="medium material-icons hover:text-gray-600">delete</i>
 
-        </a></div>
+            </a></div> : ''}
     </div>
         );
     } else {
@@ -82,7 +83,8 @@ const mapStateToProps = (state, ownProps) => {
     const message = messages ? messages[id] : null;
     return {
         message: message,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        isAdmin:state.auth.isAdmin
     }
 }
 const mapDispatchToProps = (dispatch) => {
