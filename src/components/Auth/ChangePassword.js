@@ -33,7 +33,9 @@ const ChangePassword = (props) => {
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }
-
+    if (users && users[handle].isNewUser === false) {
+        return <Navigate replace to={'/'}/>
+    }
     function handleSubmit(e) {
         e.preventDefault();
         if (isValidPassword){
