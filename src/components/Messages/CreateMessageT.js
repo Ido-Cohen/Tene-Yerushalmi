@@ -9,6 +9,7 @@ import {Navigate} from "react-router";
 
 const CreateMessageT = (props) => {
     const {auth, authError, currentUser, isAdmin} = props;
+    const [selectedFile, setSelectedFile] = useState("");
     const [yearData, setYearData] = useState(null);
     const [messagesCreated, setMessagesCreated] = useState(null);
     const [state, setState] = useState({
@@ -40,7 +41,7 @@ const CreateMessageT = (props) => {
                 'Authorization': 'Bearer ' + auth.stsTokenManager.accessToken
             }
         }).then(res => {
-            setMessagesCreated({err: false, msg: "הודעה חדשה נשלחה בהצלחה!"});
+            setMessagesCreated({err: false, msg: "!הודעה חדשה נשלחה בהצלחה"});
         }).catch(() => {
             setMessagesCreated({err: true, msg: 'משהו השתבש'})
         })
@@ -72,35 +73,36 @@ const CreateMessageT = (props) => {
                     <input type="hidden" name="remember" defaultValue="true"/>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div className={"pb-5"}>
-                            <Dropdown type={"מחזור"} values={yearData} reference={handleYearDropdown}/>
+                            <Dropdown className="align-sub" type={"מחזור"} values={yearData} reference={handleYearDropdown}/>
                         </div>
-                        <div className="relative w-full mb-3 text-right">
+                        <div className="relative w-full mb-3 text-right pb-5">
+                            <input onChange={handleChange} type={'text'} id={'title'}
+                                   className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full text-right"
+                                   placeholder="כותרת ההודעה" defaultValue={""}/>
+                        </div>
+                        <div className="relative w-full mb-3 text-right pb-5">
                             <textarea onChange={handleChange} rows={4} cols={80} id={'content'}
                                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full text-right"
                                       placeholder="הקלד הודעה" defaultValue={""}/>
                         </div>
-                        <div className="relative w-full mb-3 text-right">
-                            <input onChange={handleChange} type={'text'} id={'title'}
-                                   className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full text-right"
-                                   placeholder="כותרת" defaultValue={""}/>
-                        </div>
-                        <div className="flex justify-center items-center w-full pt-5">
+                        <div className="flex justify-center items-center w-full">
                             <label htmlFor="dropzone-file"
-                                   className="flex flex-col justify-center items-center max-w-md w-full h-53 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                   className="flex flex-col justify-center items-center max-w-md w-full h-53 rounded-lg border-2 bg-gray-700 hover:bg-gray-800 border-gray-800 border-dashed cursor-pointer dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                 <div className="flex flex-col justify-center items-center pt-5 pb-6">
-                                    <svg className="mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor"
+                                    <svg className="mb-3 w-10 h-10 text-white" fill="none" stroke="currentColor"
                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                               d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                                     </svg>
-                                    <p className="mb-2 text-sm text-gray-500 dark:text-white">
-                                        <span className="font-semibold">לחץ כדי להעלות קובץ </span>
+                                    <p className="mb-2 text-sm text-white dark:text-white">
+                                        <span className="font-semibold text-white">לחץ כדי להעלות קובץ </span>
                                         או גרור לכאן
                                     </p>
-                                    <p className="text-base text-gray-500 dark:text-white"> jpg, png, docx, pdf :מהפורמט
+                                    <p className="text-base text-white dark:text-white"> jpg, png, docx, pdf :מהפורמט
                                         הבא </p>
+                                    {<p className={"text-gray-400 text-xl"}>{selectedFile.name}</p>}
                                 </div>
-                                <input id="dropzone-file" type="file" className="hidden"/>
+                                <input id="dropzone-file" type="file" className="hidden" onChange={(e) => {setSelectedFile(e.target.files[0])}}/>
                             </label>
                         </div>
                     </div>
