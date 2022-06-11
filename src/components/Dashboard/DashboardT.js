@@ -15,11 +15,9 @@ const DashboardT = (props) => {
     if (currentUser && currentUser[0].isNewUser) {
         return <Navigate replace to={'/reset-password/new-user'}/>
     }
-    console.log(messages)
     let sorted;
     if (currentUser && messages) {
         sorted = messages.slice().sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate());
-        console.log(sorted)
         if (!isAdmin) {
             sorted = sorted.filter(msg => {
                 return msg?.yearOfGraduate === currentUser[0]?.yearOfGraduate;

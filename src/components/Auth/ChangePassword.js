@@ -41,11 +41,10 @@ const ChangePassword = (props) => {
     }
 
     function handleSubmit(e) {
-        console.log("here");
         e.preventDefault();
         if (isValidPassword){
             axios.post('/updateuser',{handle:handle,password:password1 ,address:selectedAddress,geoAddress:selected}).then(result => {
-                console.log(result);
+                return <Navigate replace to={'/'}/>
             }).catch(err => {
                 console.log(err);
                 passError = 'הקלדת סיסמא נוכחית שגויה';

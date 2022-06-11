@@ -53,7 +53,7 @@ function Map(props) {
             <GoogleMap zoom={11} center={newCenter ? newCenter : center}
                        mapContainerStyle={{width: '100%', height: '100vh'}}>
                 {users && users.map(user => {
-                    return <Marker position={user?.address}/>
+                    return <Marker position={user?.geoAddress}/>
                 })}
                 {/*{selected && <Marker position={selected}/>}*/}
             </GoogleMap>

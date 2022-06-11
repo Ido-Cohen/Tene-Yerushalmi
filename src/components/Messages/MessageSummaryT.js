@@ -14,9 +14,8 @@ moment.locale('he')
 
 const MessageSummaryT = ({message}) => {
     return (
-
         <Card sx={{ maxWidth: 345 }}>
-            <CardHeader className={"text-right flex-row-reverse"}
+            <CardHeader className={"text-right flex-row-reverse "}
                 avatar={
                     <Avatar sx={{ bgcolor: red[500], marginLeft: 2, marginRight: -2}} aria-label="recipe">
                         {message.authorFirstName[0] + message.authorLastName[0]}

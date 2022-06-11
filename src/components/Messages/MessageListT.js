@@ -30,7 +30,7 @@ const MessageListT = ({messages}) => {
         <div>
             <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-white-800">
                 <div className="container flex flex-row-reverse flex-wrap justify-between items-center mx-auto">
-                    <div className="flex md:order-2">
+                    <div className="flex md:order-2 ">
                         <button type="button" data-collapse-toggle="mobile-menu-3" aria-controls="mobile-menu-3"
                                 aria-expanded="false"
                                 className="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
@@ -39,7 +39,7 @@ const MessageListT = ({messages}) => {
 
                             </svg>
                         </button>
-                        <div className="hidden relative md:block">
+                        <div className="hidden relative md:block ">
                             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                 <svg className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +66,7 @@ const MessageListT = ({messages}) => {
                     </div>
 
 
-                    <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
+                    <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1 "
                          id="mobile-menu-3">
                         <div className="relative mt-3 md:hidden">
                             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -80,7 +80,7 @@ const MessageListT = ({messages}) => {
                                    />
                         </div>
 
-                        <div className={"flex"}>
+                        <div className={"flex "}>
                             <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                                 <li>
                                     <a href=""
@@ -112,7 +112,7 @@ const MessageListT = ({messages}) => {
             </div>
 
 
-            <div style={{height: 755}} className={"message-list section bg-white/90 overflow-y-scroll px-20 py-10 grid md:grid-cols-4  sm:grid-cols-2 gap-5"}>
+            <div style={{height: 755}} className={"message-list section bg-white/90 overflow-y-scroll px-20 py-10 grid md:grid-cols-4  sm:grid-cols-2 gap-5 flex"}>
                 {messageList && messageList.map(message => {
                     return (
                         <Link to={"/message/" + message.id} key={message.id}>
