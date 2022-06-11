@@ -26,27 +26,25 @@ const valueForAdmin = [{
         label: 'מנהל'
     }]
 const SignUpT = (props) => {
-    const {isLoaded} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries : ['places']
-    })
+
     const {auth, authError,isAdmin} = props;
     const [yearData, setYearData] = useState(null);
     const [selected, setSelected] = useState();
+    const [selectedAddress, setSelectedAddress] = useState();
     const [state, setState] = useState({
         email: '',
         password: generatePassword(),
         phoneNumber: '',
         firstName: '',
         lastName: '',
-        address: '',
+        address: selectedAddress,
+        geoAddress: selected,
         work: '',
         yearOfGraduate: '',
         isAdmin: '',
         isNewUser: true,
         isNewYear: false
     });
-    if (!isLoaded) return <div>Loading...</div>;
 
     async function getYear() {
         const response = await axios.get('/getallyears');
@@ -141,7 +139,7 @@ const SignUpT = (props) => {
                                onChange={(e) => {
                                    handleChange(e)
                                }}/>
-                        <PlacesAutoComplete setSelected={setSelected}/>
+                        <PlacesAutoComplete setSelected={setSelected} setSelectedAddress={setSelectedAddress}/>
                         <input type="text" id={"work"}
                                className="block border border-grey-light w-full p-3 rounded mb-4 text-right" name="work"
                                placeholder="עבודה"

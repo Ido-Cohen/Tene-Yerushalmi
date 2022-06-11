@@ -39,7 +39,6 @@ const App = () => {
                     <Route path={"/settings"} element={<Settings/>}/>
                     <Route path={"/maps"} element={<MapDashboard/>}/>
                     <Route path={"/contacts"} element={<ContactsListT/>}/>
-                    <Route path={"/contacts"} element={<ContactsList/>}/>
                     <Route path={"/reset-password/new-user"} element={<NewUserLandingPage/>}/>
                     <Route path={"/forgot-password"} element={<ResetPassword/>}/>
                 </Routes>
@@ -49,7 +48,7 @@ const App = () => {
                         by="TeneJLM™"
                         year={2022}
                     />
-                    <Footer.LinkGroup className="mt-3 flex-wrap items-center text-sm sm:mt-0">
+                    <Footer.LinkGroup className="mt-3 flex-wrap items-center text-sm sm:mt-0 ">
                         <Footer.Link href="https://tenejlm.co.il/">
                             About
                         </Footer.Link>

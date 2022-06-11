@@ -5,26 +5,26 @@ import {firestoreConnect, isLoaded} from "react-redux-firebase";
 import {compose} from "redux";
 import {Navigate} from "react-router";
 import MessageListT from "../Messages/MessageListT";
+import {Button, Spinner} from "flowbite-react";
 
 const DashboardT = (props) => {
 
     const {messages, auth, currentUser, isAdmin} = props;
     const checkStore = useSelector(state => state.firestore.ordered.users)
     if (!isLoaded(checkStore) && auth.uid){
-        return (<div>
-            <div className="preloader-wrapper big active">
-                <div className="spinner-layer spinner-blue-only">
-                    <div className="circle-clipper left">
-                        <div className="circle"/>
-                    </div>
-                    <div className="gap-patch">
-                        <div className="circle"/>
-                    </div>
-                    <div className="circle-clipper right">
-                        <div className="circle"/>
-                    </div>
-                </div>
-            </div>
+        return (<div className="flex flex-row gap-3 align-middle">
+            <Button>
+                <Spinner aria-label="Spinner button example" />
+                <span className="pl-3">
+      Loading...
+    </span>
+            </Button>
+            <Button color="gray">
+                <Spinner aria-label="Alternate spinner button example" />
+                <span className="pl-3">
+      Loading...
+    </span>
+            </Button>
         </div>);
     }
     if (!auth.uid) {

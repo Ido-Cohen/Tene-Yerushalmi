@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import axios from "axios";
 import {firestoreConnect} from "react-redux-firebase";
 import {compose} from "redux";
+import {Navigate} from "react-router";
 
 const CreateMessageT = (props) => {
     const {auth, authError, currentUser, isAdmin} = props;
@@ -17,6 +18,9 @@ const CreateMessageT = (props) => {
         uid: auth.uid,
         handle: auth.email.substring(0, auth.email.lastIndexOf("@"))
     });
+    if (!auth.uid) {
+        return <Navigate replace to={'/'}/>
+    }
     const handleYearDropdown = (event) => {
         setState(prevState => ({
             ...prevState,
