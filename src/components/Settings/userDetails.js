@@ -56,16 +56,16 @@ const UserDetails = (props) => {
 
         if (currentUser.isAdmin) {
             axios.post('/updateuseradmin', state).then(result => {
-                console.log(result);
                 setResponse(result.data);
             }).catch(err => {
-                console.log(err);
+                setResponse(err.data);
             })
         } else {
             axios.post('/updateusernoadmin', state).then(result => {
-                console.log(result);
+                setResponse(result.data);
             }).catch(err => {
                 console.log(err);
+                setResponse(err.data);
             })
         }
 

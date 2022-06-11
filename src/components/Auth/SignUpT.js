@@ -26,10 +26,7 @@ const valueForAdmin = [{
         label: 'מנהל'
     }]
 const SignUpT = (props) => {
-    const {isLoaded} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries : ['places']
-    })
+
     const {auth, authError,isAdmin} = props;
     const [yearData, setYearData] = useState(null);
     const [selected, setSelected] = useState();
@@ -48,7 +45,6 @@ const SignUpT = (props) => {
         isNewUser: true,
         isNewYear: false
     });
-    if (!isLoaded) return <div>Loading...</div>;
 
     async function getYear() {
         const response = await axios.get('/getallyears');
