@@ -31,19 +31,6 @@ const CreateMessage = (props) => {
         return <Navigate replace to={'/'}/>
     }
     return (
-        // <div className={"container"}>
-        //     <form className={"white right-align"} onSubmit={handleSubmit}>
-        //         <h5 className={"grey-text text-darken-3"}>איפוס סיסמא</h5>
-        //         <div className={"input-field"}>
-        //             <label htmlFor={"email"} >Email</label>
-        //             <input type={"email"} id={"email"} onChange={handleChange}/>
-        //         </div>
-        //         <div className={"input-field"}>
-        //             <button className={"btn pink lighten-1 z-depth-0"}>איפוס סיסמא</button>
-        //         </div>
-        //     </form>
-        // </div>
-
         <div className="blue-grey-text min-h-full flex flex-col py-12 px-4 sm:px-6 lg:px-8">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-1 ">
                 <div className="bg-blue px-1 py-8 rounded shadow-md text-black w-full rounded-lg bg-white/90">

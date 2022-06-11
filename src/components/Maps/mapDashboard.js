@@ -24,14 +24,14 @@ const cities = [
     {value: {lat: 33.20733, lng: 35.57212}, label: 'קרית שמונה'},
 ]
 const MapDashboard = (props) => {
-    const {isLoaded} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries: ['places']
-
-    })
+    // const {isLoaded} = useLoadScript({
+    //     googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
+    //     libraries: ['places']
+    //
+    // })
     const{users} = props;
     const [state, setState] = useState({lat: '', lin: ''});
-    if (!isLoaded) return <div>Loading...</div>;
+    // if (!isLoaded) return <div>Loading...</div>;
     return <Map users={users}/>
 };
 
@@ -53,7 +53,7 @@ function Map(props) {
             <GoogleMap zoom={11} center={newCenter ? newCenter : center}
                        mapContainerStyle={{width: '100%', height: '100vh'}}>
                 {users && users.map(user => {
-                    return <Marker position={user?.geoAddress}/>
+                    return <Marker position={user?.geoAddress} />
                 })}
                 {/*{selected && <Marker position={selected}/>}*/}
             </GoogleMap>
