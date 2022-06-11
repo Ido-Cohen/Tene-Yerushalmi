@@ -15,7 +15,6 @@ import SignUpT from "../Auth/SignUpT";
 import AddGroupT from "../Auth/addGroupT";
 import CreateMessageT from "../Messages/CreateMessageT";
 import ContactsListT from '../Contacts/contactListT'
-import Example from "../layout/example";
 import {Footer} from "flowbite-react";
 import NewUserLandingPage from  "../Auth/NewUserLandingPage";
 import ResetPassword from "../Auth/ResetPassword";
