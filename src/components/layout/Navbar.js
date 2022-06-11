@@ -13,8 +13,10 @@ const Navbar = (props) => {
         let sidenav = document.querySelector('#slide-out');
         M.Sidenav.init(sidenav, {});
     })
+
+    // let links = auth.uid ? (users[handle].isNewUser ? <NewUserLinks profile={profile}/> :<SignInLinks profile={profile}/>) : <SignOutLinks/>
     const checkStore = useSelector(state => state.firestore.ordered.users)
-    if (!isLoaded(checkStore)){
+    if (!isLoaded(checkStore) && auth.uid){
         return (<div>
             <div className="preloader-wrapper big active">
                 <div className="spinner-layer spinner-blue-only">
@@ -31,8 +33,6 @@ const Navbar = (props) => {
             </div>
         </div>);
     }
-    // let links = auth.uid ? (users[handle].isNewUser ? <NewUserLinks profile={profile}/> :<SignInLinks profile={profile}/>) : <SignOutLinks/>
-
     let links = <SignOutLinks/>;
     if(auth.uid){
         links = <SignInLinks profile={users[handle].isNewUser}/>;
@@ -40,6 +40,7 @@ const Navbar = (props) => {
             links = <NewUserLinks profile={users[handle].isNewUser}/>;
         }
     }
+
 
 
   return(
