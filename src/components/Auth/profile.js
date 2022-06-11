@@ -49,7 +49,6 @@ const profile = () => {
                         </button>
                     </form>
                 </div>
-
             </div>
         </div>
     );
