@@ -33,6 +33,7 @@ const ChangePassword = (props) => {
     const [password2, setPassword2] = useState('');
     const [currPassword, setCurrPassword] = useState('');
     const [selected, setSelected] = useState();
+    const [selectedAddress, setSelectedAddress] = useState();
     const {authError,auth,users,setIsNewUser,signOut,handle} = props;
     if (!isLoaded) return <div>Loading...</div>;
     if (!auth.uid) {
@@ -43,7 +44,7 @@ const ChangePassword = (props) => {
         console.log("here");
         e.preventDefault();
         if (isValidPassword){
-            axios.post('/updateuser',{handle:handle,password:password1 ,address:selected}).then(result => {
+            axios.post('/updateuser',{handle:handle,password:password1 ,address:selectedAddress,geoAddress:selected}).then(result => {
                 console.log(result);
             }).catch(err => {
                 console.log(err);
@@ -134,7 +135,7 @@ const ChangePassword = (props) => {
                                onChange={handleChange}
                         />
 
-                            <PlacesAutoComplete setSelected={setSelected}/>
+                            <PlacesAutoComplete setSelected={setSelected} setSelectedAddress={setSelectedAddress}/>
                         <input type="text" id={"work"}
                                className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
                                name="work"
