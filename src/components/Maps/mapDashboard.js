@@ -25,8 +25,8 @@ const cities = [
     {value: {lat: 33.20733, lng: 35.57212}, label: 'קרית שמונה'},
 ]
 const MapDashboard = (props) => {
-    const {auth,users} =props;
-    if (!auth.uid || !auth.isAdmin) {
+    const {auth,users,currentUser} =props;
+    if (!auth.uid || !currentUser.isAdmin) {
         return <Navigate replace to={'/'}/>
     }
     return <Map users={users}/>
@@ -95,7 +95,15 @@ export const PlacesAutoComplete = ({setSelected,setSelectedAddress,check,disable
     </Combobox>
 }
 const mapStateToProps = (state) => {
+    const users = state.firestore.ordered.users;
+    let user;
+    if (users) {
+        user = users.filter(user => {
+            return user.handle === state.auth.handle;
+        });
+    }
     return {
+        currentUser:user[0],
         authError: state.auth.authError,
         auth: state.firebase.auth,
         users: state.firestore.ordered.users,
