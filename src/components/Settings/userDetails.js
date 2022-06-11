@@ -199,7 +199,7 @@ const UserDetails = (props) => {
                                 עדכון פרטים
                             </button>
                                 : ''}
-                            {!isDisabled ? <Modal handleDelete={handleDelete}/> : ''}
+                            {!isDisabled && currentUser.isAdmin === true ? <Modal handleDelete={handleDelete}/> : ''}
                             {!isDisabled ? <button type="submit" id={"submit"}
                                                    className="w-full text-center py-3 rounded text-white bg-orange-400 hover:bg-orange-600 focus:outline-none my-1 text-center"
                                                    onClick={handleCancel}>
