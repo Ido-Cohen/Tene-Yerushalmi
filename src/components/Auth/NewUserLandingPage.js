@@ -25,13 +25,13 @@ const NewUserLandingPage = (props) => {
     }
     return (
         <div className={"container"}>
-            <h4 className={"center-align grey-text text-darken-3"}>
+            <h1 className={"center-align grey-text text-darken-3"}>
                 שלום {users[handle]?.firstName}, ברוכים הבאים לאפליקציית הבוגרים של טנא ירושלמי
-            </h4>
-            <h6 className={"center-align grey-text text-darken-3"}>
+            </h1>
+            <h5 className={"center-align grey-text text-darken-3"}>
                 .זוהי התחברות ראשונה, עליך לבחור סיסמא חדשה
                 ולעדכן מספר נוסף של פרטים.
-            </h6>
+            </h5>
             <ChangePassword/>
         </div>
     );
