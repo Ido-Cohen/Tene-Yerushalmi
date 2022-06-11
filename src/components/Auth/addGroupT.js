@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 
 const chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const passwordLength = 6;
-let params;
 const AddGroupT  = (props) => {
     const {auth} = props
     const [selectedFile, setSelectedFile] = useState("");
@@ -86,12 +85,6 @@ const AddGroupT  = (props) => {
                 return validateEmail(e.email);
             })
             json.forEach((student) => {
-                params = {
-                    email: student.email,
-                    name: student.firstName,
-                    from_name: 'Tene',
-                    password: student.password
-                }
                 studentDetails = {
 
                     email: student.email,
@@ -107,22 +100,11 @@ const AddGroupT  = (props) => {
                     isAdmin: false,
                     yearOfGraduate
                 };
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(studentDetails),
-                };
-                console.log(JSON.stringify(studentDetails));
-                // sendEmail();
-                // signUp(studentDetails);
-                // axios.get('/messages').then(res => {
-                //     console.log(res.data);
-                // })
+
                 axios.post("/signup",studentDetails)
                     .then((res) => console.log(res))
 
             })
-            console.log(json);
         }
 
     };

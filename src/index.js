@@ -20,6 +20,7 @@ import AppLogout from "./components/Auth/Logout";
 import store, {Persistor} from "./store/reducers/store";
 import {PersistGate} from 'redux-persist/integration/react'
 import {useLoadScript} from "@react-google-maps/api";
+import {Button, Spinner} from "flowbite-react";
 const libraries = ['places'];
 //
 // const store = createStore(
@@ -53,20 +54,19 @@ function AuthIsLoaded({children}) {
     //
     // })
     const auth = useSelector(state => state.firebase.auth)
-    if (!isLoaded(auth)) return (<div>
-        <div className="preloader-wrapper big active">
-            <div className="spinner-layer spinner-blue-only">
-                <div className="circle-clipper left">
-                    <div className="circle"/>
-                </div>
-                <div className="gap-patch">
-                    <div className="circle"/>
-                </div>
-                <div className="circle-clipper right">
-                    <div className="circle"/>
-                </div>
-            </div>
-        </div>
+    if (!isLoaded(auth)) return (<div className="flex flex-row gap-3">
+        <Button>
+            <Spinner aria-label="Spinner button example" />
+            <span className="pl-3">
+      Loading...
+    </span>
+        </Button>
+        <Button color="gray">
+            <Spinner aria-label="Alternate spinner button example" />
+            <span className="pl-3">
+      Loading...
+    </span>
+        </Button>
     </div>);
     return children
 }
@@ -102,11 +102,9 @@ ReactDOM.render(
             <AuthIsLoaded>
                 <MapIsLoaded>
 
-                    <AppLogout>
                         <PersistGate Loading={null} persistor={Persistor}>
                             <App/>
                         </PersistGate>
-                    </AppLogout>
 
 </MapIsLoaded>
             </AuthIsLoaded>

@@ -62,7 +62,7 @@ function Map(props) {
     );
 }
 
-export const PlacesAutoComplete = ({setSelected,setSelectedAddress}) => {
+export const PlacesAutoComplete = ({setSelected,setSelectedAddress,check,disabled,setState}) => {
     const {
         ready,
         value,
@@ -78,11 +78,16 @@ export const PlacesAutoComplete = ({setSelected,setSelectedAddress}) => {
         const {lat, lng} = await getLatLng(result[0]);
         setSelected({lat, lng});
         setSelectedAddress(address);
+        setState(prevState => ({
+            ...prevState,
+            'address' : address,
+            "geoAddress":{lat, lng}
+        }))
     }
     return <Combobox onSelect={handleSelect}>
-        <ComboboxInput value={value} onChange={(e) => {
+        <ComboboxInput value={disabled ? check : value} onChange={(e) => {
             setValue(e.target.value)
-        }} disabled={!ready} className={'block border border-grey-light w-full p-3 rounded mb-4 text-right'}
+        }} disabled={disabled ? disabled : !ready} className={'block border border-grey-light w-full p-3 rounded mb-4 text-right'}
                        placeholder={"כתובת מגורים"}/>
         <ComboboxPopover>
             <ComboboxList>

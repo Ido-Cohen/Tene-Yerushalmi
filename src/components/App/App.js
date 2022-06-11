@@ -49,7 +49,7 @@ const App = () => {
                         by="TeneJLM™"
                         year={2022}
                     />
-                    <Footer.LinkGroup className="mt-3 flex-wrap items-center text-sm sm:mt-0">
+                    <Footer.LinkGroup className="mt-3 flex-wrap items-center text-sm sm:mt-0 ">
                         <Footer.Link href="https://tenejlm.co.il/">
                             About
                         </Footer.Link>

@@ -35,9 +35,9 @@ const Navbar = (props) => {
     }
     let links = <SignOutLinks/>;
     if(auth.uid){
-        links = <SignInLinks profile={users[handle].isNewUser}/>;
+        links = <SignInLinks profile={users[handle]}/>;
         if (users && users[handle].isNewUser){
-            links = <NewUserLinks profile={users[handle].isNewUser}/>;
+            links = <NewUserLinks profile={users[handle]}/>;
         }
     }
 
