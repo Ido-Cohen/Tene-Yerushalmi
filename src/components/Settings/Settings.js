@@ -4,6 +4,8 @@ import {compose} from "redux";
 import {firestoreConnect, isLoaded} from "react-redux-firebase";
 import {Navigate} from "react-router";
 import {Table} from 'flowbite-react'
+import MessageSummaryT from "../Messages/MessageSummaryT";
+import {Link} from "react-router-dom";
 
 const columns = [
     {field: "id", headerName: "ID", width: 70},
@@ -57,7 +59,7 @@ const Settings = (props) => {
                 })}
             </Table.Head>
             <Table.Body className="divide-y">
-                {users.map(user => {
+                {users && users.map(user => {
                     return (
                         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -77,12 +79,19 @@ const Settings = (props) => {
                                 {user.firstName + " " + user.lastName}
                             </Table.Cell>
                             <Table.Cell>
-                                <a
-                                    href="/tables"
-                                    className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                >
-                                    Edit
-                                </a>
+                                <Link to={"/userProfile/" + user.handle} key={user.handle}>
+                                    <span className="font-medium text-blue-600 hover:underline dark:text-blue-500">
+                                        Edit
+                                    </span>
+
+                                {/*<a*/}
+                                {/*    href="/tables"*/}
+                                {/*    className="font-medium text-blue-600 hover:underline dark:text-blue-500"*/}
+                                {/*>*/}
+                                {/*    Edit*/}
+                                {/*</a>*/}
+                                </Link>
+
                             </Table.Cell>
                         </Table.Row>
                     )

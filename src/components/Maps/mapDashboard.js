@@ -62,7 +62,7 @@ function Map(props) {
     );
 }
 
-export const PlacesAutoComplete = ({setSelected}) => {
+export const PlacesAutoComplete = ({setSelected,setSelectedAddress}) => {
     const {
         ready,
         value,
@@ -77,6 +77,7 @@ export const PlacesAutoComplete = ({setSelected}) => {
         const result = await getGeocode({address});
         const {lat, lng} = await getLatLng(result[0]);
         setSelected({lat, lng});
+        setSelectedAddress(address);
     }
     return <Combobox onSelect={handleSelect}>
         <ComboboxInput value={value} onChange={(e) => {
