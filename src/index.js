@@ -47,13 +47,13 @@ const rrfProps = {
 }
 
 function AuthIsLoaded({children}) {
-    const {map} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries,
-
-    })
+    // const {map} = useLoadScript({
+    //     googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
+    //     libraries,
+    //
+    // })
     const auth = useSelector(state => state.firebase.auth)
-    if (!isLoaded(auth) && !map) return (<div>
+    if (!isLoaded(auth)) return (<div>
         <div className="preloader-wrapper big active">
             <div className="spinner-layer spinner-blue-only">
                 <div className="circle-clipper left">
@@ -70,36 +70,37 @@ function AuthIsLoaded({children}) {
     </div>);
     return children
 }
-// function MapIsLoaded({children}) {
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const {isLoaded} = useLoadScript({
-//         googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
-//         libraries: ['places']
-//
-//     })
-//     if (!isLoaded) return (<div>
-//         <div className="preloader-wrapper big active">
-//             <div className="spinner-layer spinner-blue-only">
-//                 <div className="circle-clipper left">
-//                     <div className="circle"/>
-//                 </div>
-//                 <div className="gap-patch">
-//                     <div className="circle"/>
-//                 </div>
-//                 <div className="circle-clipper right">
-//                     <div className="circle"/>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>);
-//     return children
-// }
+function MapIsLoaded({children}) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const {isLoaded} = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
+        libraries: ['places']
+
+    })
+    if (!isLoaded) return (<div>
+        <div className="preloader-wrapper big active">
+            <div className="spinner-layer spinner-blue-only">
+                <div className="circle-clipper left">
+                    <div className="circle"/>
+                </div>
+                <div className="gap-patch">
+                    <div className="circle"/>
+                </div>
+                <div className="circle-clipper right">
+                    <div className="circle"/>
+                </div>
+            </div>
+        </div>
+    </div>);
+    return children
+}
 
 ReactDOM.render(
     <Provider store={store}>
 
         <ReactReduxFirebaseProvider {...rrfProps}>
             <AuthIsLoaded>
+                <MapIsLoaded>
 
                     <AppLogout>
                         <PersistGate Loading={null} persistor={Persistor}>
@@ -107,6 +108,7 @@ ReactDOM.render(
                         </PersistGate>
                     </AppLogout>
 
+</MapIsLoaded>
             </AuthIsLoaded>
         </ReactReduxFirebaseProvider>
 

@@ -10,7 +10,7 @@ const DashboardT = (props) => {
 
     const {messages, auth, currentUser, isAdmin} = props;
     const checkStore = useSelector(state => state.firestore.ordered.users)
-    if (!isLoaded(checkStore)){
+    if (!isLoaded(checkStore) && auth.uid){
         return (<div>
             <div className="preloader-wrapper big active">
                 <div className="spinner-layer spinner-blue-only">
