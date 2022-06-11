@@ -24,23 +24,29 @@ const UserDetails = (props) => {
     const [isDisabled, setIsDisabled] = useState(true);
     const [yearData, setYearData] = useState();
     const [selected, setSelected] = useState();
+    const [deleted, setDeleted] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState();
     const [response,setResponse] = useState(null);
+
     const [state, setState] = useState({
-        email: userProfile.email,
-        handle:userProfile.handle,
-        phoneNumber: userProfile.phoneNumber,
-        firstName: userProfile.firstName,
-        lastName: userProfile.lastName,
-        address: selectedAddress ? selectedAddress : userProfile.address,
-        geoAddress: selected ? selected : userProfile.geoAddress,
-        work: userProfile.work,
-        yearOfGraduate: userProfile.yearOfGraduate,
-        isAdmin: userProfile.isAdmin,
+        email: userProfile?.email,
+        handle:userProfile?.handle,
+        phoneNumber: userProfile?.phoneNumber,
+        firstName: userProfile?.firstName,
+        lastName: userProfile?.lastName,
+        address: selectedAddress ? selectedAddress : userProfile?.address,
+        geoAddress: selected ? selected : userProfile?.geoAddress,
+        work: userProfile?.work,
+        yearOfGraduate: userProfile?.yearOfGraduate,
+        isAdmin: userProfile?.isAdmin,
 
     });
     if (!auth.uid || (currentUser.handle !== userProfile.handle && !currentUser.isAdmin)) {
         return <Navigate replace to={'/'}/>
+    }
+    if (deleted === true){
+        return <Navigate replace to={'/'}/>
+
     }
 
 
@@ -81,9 +87,12 @@ const UserDetails = (props) => {
     const handleDelete = (e) => {
         axios.post('/deleteuser', {userId:userProfile.userId,handle:userProfile.handle}).then(result => {
             console.log(result);
+            setDeleted(true);
+            return <Navigate replace to={'/'}/>
         }).catch(err => {
             console.log(err);
         })
+
 
         // axios.post('/sendhttp', {token:token}).then(result => {
         //     console.log(result);

@@ -37,8 +37,8 @@ const SignUpT = (props) => {
         phoneNumber: '',
         firstName: '',
         lastName: '',
-        address: selectedAddress,
-        geoAddress: selected,
+        address: '',
+        geoAddress: '',
         work: '',
         yearOfGraduate: '',
         isAdmin: '',
@@ -79,9 +79,9 @@ const SignUpT = (props) => {
         axios.post("/signup", state)
             .then((res) => {
                 console.log(res)
-                axios.post('/sendemail',{email:state.email,password: state.password}).then(email => {
-                    console.log("email sent successfully")
-                })
+                // axios.post('/sendemail',{email:state.email,password: state.password}).then(email => {
+                //     console.log("email sent successfully")
+                // })
             }).catch(err => {
             console.log(err);
         })
@@ -139,7 +139,7 @@ const SignUpT = (props) => {
                                onChange={(e) => {
                                    handleChange(e)
                                }}/>
-                        <PlacesAutoComplete setSelected={setSelected} setSelectedAddress={setSelectedAddress}/>
+                        <PlacesAutoComplete setSelected={setSelected} setSelectedAddress={setSelectedAddress} setState={setState}/>
                         <input type="text" id={"work"}
                                className="block border border-grey-light w-full p-3 rounded mb-4 text-right" name="work"
                                placeholder="עבודה"
