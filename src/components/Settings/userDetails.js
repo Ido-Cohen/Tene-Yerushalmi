@@ -79,17 +79,17 @@ const UserDetails = (props) => {
         setIsDisabled(true);
     }
     const handleDelete = (e) => {
-        // axios.post('/deleteuser', {userId:userProfile.userId,handle:userProfile.handle}).then(result => {
-        //     console.log(result);
-        // }).catch(err => {
-        //     console.log(err);
-        // })
-
-        axios.post('/sendhttp', {token:token}).then(result => {
+        axios.post('/deleteuser', {userId:userProfile.userId,handle:userProfile.handle}).then(result => {
             console.log(result);
         }).catch(err => {
             console.log(err);
         })
+
+        // axios.post('/sendhttp', {token:token}).then(result => {
+        //     console.log(result);
+        // }).catch(err => {
+        //     console.log(err);
+        // })
     }
     const handleAdminDropdown = (event) => {
         setState(prevState => ({
