@@ -39,7 +39,7 @@ const UserDetails = (props) => {
         isAdmin: userProfile.isAdmin,
 
     });
-    if (!auth.uid) {
+    if (!auth.uid || (currentUser.handle !== userProfile.handle && !currentUser.isAdmin)) {
         return <Navigate replace to={'/'}/>
     }
 
