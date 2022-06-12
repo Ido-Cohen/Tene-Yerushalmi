@@ -17,7 +17,6 @@ const CreateMessage = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('/resetpassword',{email: email}).then(res =>{
-            console.log(res);
             setResponse(res.data);
         }).catch(err => {
             console.log(err);
@@ -55,7 +54,6 @@ const CreateMessage = (props) => {
 
 }
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         auth: state.firebase.auth
     }

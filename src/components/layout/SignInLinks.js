@@ -6,7 +6,6 @@ import {signOut} from "../../store/actions/authActions";
 
 const SignInLinks = (props) => {
     const {isAdmin, profile} = props;
-    console.log(profile);
     return (
 
         <div className={'sign-in-links'}>

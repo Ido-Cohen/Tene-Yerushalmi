@@ -35,7 +35,6 @@ export const signUp = (newUser) => {
           newUser.email,
           newUser.password
       ).then((resp) => {
-          console.log(resp.user.uid);
          return firestore.collection('users').doc(resp.user.uid).set({
               ...newUser,
               initials:newUser.firstName[0] + newUser.lastName[0]
@@ -51,7 +50,6 @@ export const signUp = (newUser) => {
 export const setIsNewUser = (uid) => {
     return (dispatch,getState,{getFirebase,getFirestore}) => {
         const firestore = getFirestore();
-        console.log(uid);
         firestore.collection('users').doc(uid).update({isNewUser:false})
             .then(() => {
                 dispatch({type: "CHANGED"})

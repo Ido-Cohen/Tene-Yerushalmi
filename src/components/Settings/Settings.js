@@ -8,26 +8,25 @@ import MessageSummaryT from "../Messages/MessageSummaryT";
 import {Link} from "react-router-dom";
 
 const columns = [
-    {field: "id", headerName: "ID", width: 70},
-    {field: "email", headerName: "Email", width: 130},
-    {field: "firstName", headerName: "First name", width: 130},
-    {field: "lastName", headerName: "Last name", width: 100},
+    {field: "year", headerName: "מחזור", width: 70},
+    {field: "email", headerName: "אימייל", width: 130},
+    {field: "firstName", headerName: "שם פרטי", width: 130},
+    {field: "lastName", headerName: "שם משפחה", width: 100},
     {
         field: "fullName",
-        headerName: "Full name",
+        headerName: "שם מלא",
         description: "This column has a value getter and is not sortable.",
         sortable: false,
         width: 130,
         valueGetter: (params) =>
             `${params.row.firstName || ""} ${params.row.lastName || ""}`
     },
-    {field: "edit", headerName: "Edit User", width: 70},
+    {field: "edit", headerName: "עריכה", width: 70},
 
 ];
 
 const Settings = (props) => {
     const {auth, profile, users,currentUser} = props;
-    console.log(auth)
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }
@@ -69,7 +68,7 @@ const Settings = (props) => {
                     return (
                         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                {user.handle}
+                                {user.yearOfGraduate}
                             </Table.Cell>
                             <Table.Cell>
                                 {user.email}

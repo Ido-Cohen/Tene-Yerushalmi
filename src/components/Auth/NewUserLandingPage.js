@@ -13,7 +13,6 @@ let passError = '';
 const NewUserLandingPage = (props) => {
 
     const {authError, auth, users, handle} = props;
-    console.log(users);
     if (!auth.uid || !users) {
         return <Navigate replace to={'/signin'}/>
     }
@@ -37,7 +36,6 @@ const NewUserLandingPage = (props) => {
     );
 }
 const mapStateToProps = (state) => {
-    console.log(state)
     // console.log(state.firestore.data.users[state.firebase.auth.uid]);
     return {
         authError: state.auth.authError,

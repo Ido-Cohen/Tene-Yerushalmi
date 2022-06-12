@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {getUserData, signIn, signOut} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 import {Navigate} from "react-router";
+import {NavLink} from "react-router-dom";
 
 
 const SignInT = (props) => {
@@ -74,9 +75,10 @@ const SignInT = (props) => {
 
                     <div className="flex items-center justify-end pt-5">
                         <div className="text-sm">
-                            <a href="/forgot-password" className="font-medium text-indigo-600 hover:text-indigo-500 text-right">
-                                ?שכחת סיסמה
-                            </a>
+                            {/*<Navigate replace to={}*/}
+                            <span className="font-medium text-indigo-600 hover:text-indigo-500 text-right">
+                                <NavLink to={'/forgot-password'}>?שכחת סיסמה</NavLink>
+                            </span>
                         </div>
                     </div>
 

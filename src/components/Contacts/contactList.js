@@ -25,7 +25,6 @@ const ContactList = (props) => {
     );
 };
 const mapStateToProps = (state) => {
-    console.log(state);
     return{
         users: state.firestore.ordered.users,
         auth: state.firebase.auth,

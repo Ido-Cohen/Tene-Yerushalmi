@@ -30,7 +30,6 @@ app.post("/createUsers",  (req, res) => {
     //     res.status(200).send({email: doc.data().email})
     //
     // }
-    console.log(req.body.email);
 getAuth().createUser({
     email:req.body.email,
     password: req.body.password

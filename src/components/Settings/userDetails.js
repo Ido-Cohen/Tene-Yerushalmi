@@ -86,7 +86,6 @@ const UserDetails = (props) => {
     }
     const handleDelete = (e) => {
         axios.post('/deleteuser', {userId:userProfile.userId,handle:userProfile.handle}).then(result => {
-            console.log(result);
             setDeleted(true);
             return <Navigate replace to={'/'}/>
         }).catch(err => {
@@ -234,7 +233,6 @@ const UserDetails = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
     const loc = window.location.pathname;
     const handle = loc.substring(loc.lastIndexOf('/') + 1);
     const users = state.firestore.ordered.users;

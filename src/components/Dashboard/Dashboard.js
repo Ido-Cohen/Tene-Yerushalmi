@@ -10,7 +10,6 @@ const Dashboard = (props) => {
     if (!auth.uid) {
         return <Navigate replace to={'/signin'}/>
     }
-    console.log(isAdmin);
     if (currentUser && currentUser[0].isNewUser){
         return <Navigate replace to={'/reset-password/new-user'}/>
     }
@@ -43,7 +42,6 @@ const mapStateToProps = (state) => {
             return user.handle === handle;
         });
     }
-    console.log(state);
 
     return {
         messages: state.firestore.ordered.messages,

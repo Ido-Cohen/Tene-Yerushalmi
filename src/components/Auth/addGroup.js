@@ -48,7 +48,6 @@ const AddGroup = (props) => {
             alert("אין שם לקבוצה");
             return;
         }
-        console.log(selectedFile);
         var reader = new FileReader();
         reader.readAsText(selectedFile);
         let fileText;
@@ -111,7 +110,6 @@ const AddGroup = (props) => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(studentDetails),
                 };
-                console.log(JSON.stringify(studentDetails));
                 // sendEmail();
                 // signUp(studentDetails);
                 // axios.get('/messages').then(res => {
@@ -121,7 +119,6 @@ const AddGroup = (props) => {
                 //     .then((res) => console.log(res))
 
             })
-            console.log(json);
         }
 
     };

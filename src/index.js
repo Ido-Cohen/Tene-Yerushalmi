@@ -2,15 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App/App";
 import './index.css';
-import {legacy_createStore as createStore} from 'redux'
-import {applyMiddleware, compose} from "redux";
-import rootReducer from "./store/reducers/rootReducer";
+
 import {Provider, useSelector} from "react-redux";
 import thunk from "redux-thunk";
 import {ReactReduxFirebaseProvider, getFirebase, isLoaded} from "react-redux-firebase";
 import {
     reduxFirestore,
-    getFirestore,
     createFirestoreInstance,
 } from "redux-firestore";
 import fbConfig from "./config/fbConfig";
@@ -21,6 +18,7 @@ import store, {Persistor} from "./store/reducers/store";
 import {PersistGate} from 'redux-persist/integration/react'
 import {useLoadScript} from "@react-google-maps/api";
 import {Button, Spinner} from "flowbite-react";
+import axios from "axios";
 const libraries = ['places'];
 
 //
@@ -31,7 +29,6 @@ const libraries = ['places'];
 //         reduxFirestore(firebase, fbConfig)
 //     )
 // );
-
 
 const rrfConfig = {
     userProfile: 'users',
@@ -75,7 +72,7 @@ function MapIsLoaded({children}) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const {isLoaded} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries: ['places']
+        libraries
 
     })
     if (!isLoaded) return (<div>

@@ -1,22 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import Dropdown from "./Dropdown";
 import {Navigate} from "react-router";
 import {signUp} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 import axios from "axios";
-import log from "tailwindcss/lib/util/log";
-import {data} from "autoprefixer";
-import {useLoadScript} from "@react-google-maps/api";
 import {PlacesAutoComplete} from "../Maps/mapDashboard";
 
 const chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const passwordLength = 6;
-let params;
 const valueForAdmin = [{
     value: false,
     label: 'בוגר'
@@ -74,7 +65,6 @@ const SignUpT = (props) => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(state)
 
         axios.post("/signup", state)
             .then((res) => {
