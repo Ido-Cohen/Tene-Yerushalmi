@@ -41,13 +41,14 @@ const UserDetails = (props) => {
         isAdmin: userProfile?.isAdmin,
 
     });
-    if (!auth.uid || (currentUser.handle !== userProfile.handle && !currentUser.isAdmin)) {
-        return <Navigate replace to={'/'}/>
-    }
     if (deleted === true){
         return <Navigate replace to={'/'}/>
 
     }
+    if (!auth.uid || (currentUser.handle !== userProfile.handle && !currentUser.isAdmin)) {
+        return <Navigate replace to={'/'}/>
+    }
+
 
 
 
@@ -91,13 +92,6 @@ const UserDetails = (props) => {
         }).catch(err => {
             console.log(err);
         })
-
-
-        // axios.post('/sendhttp', {token:token}).then(result => {
-        //     console.log(result);
-        // }).catch(err => {
-        //     console.log(err);
-        // })
     }
     const handleAdminDropdown = (event) => {
         setState(prevState => ({

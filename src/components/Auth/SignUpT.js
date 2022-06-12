@@ -22,6 +22,7 @@ const SignUpT = (props) => {
     const [yearData, setYearData] = useState(null);
     const [selected, setSelected] = useState();
     const [selectedAddress, setSelectedAddress] = useState();
+    const [response,setResponse] = useState(null);
     const [state, setState] = useState({
         email: '',
         password: generatePassword(),
@@ -68,11 +69,13 @@ const SignUpT = (props) => {
 
         axios.post("/signup", state)
             .then((res) => {
-                console.log(res)
                 axios.post('/sendemail',{email:state.email,password: state.password}).then(email => {
                     console.log("email sent successfully")
                 })
+                setResponse(res.data);
+
             }).catch(err => {
+            setResponse(err.data);
             console.log(err);
         })
     }
@@ -149,7 +152,9 @@ const SignUpT = (props) => {
                                 className="w-full text-center py-3 rounded text-white bg-orange-400 hover:bg-orange-600 focus:outline-none my-1 text-center">יצירת
                             משתמש
                         </button>
+                        {response ? (response.err ? <p className={"text-red-600 text-center"}>משהו השתבש</p> : <p className={"text-blue-600 text-center"}>{response.message}</p>) : ''}
                     </form>
+
                 </div>
 
             </div>

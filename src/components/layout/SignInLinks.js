@@ -22,6 +22,9 @@ const SignInLinks = (props) => {
                 <li>
                     <NavLink to={'/create'}>הודעה חדשה</NavLink>
                 </li>
+                <li>
+                    <NavLink to={'/'}>הודעות</NavLink>
+                </li>
                 {isAdmin ? <li>
                     <NavLink to={'/add'}>הוספת קבוצה</NavLink>
                 </li> : ''}
@@ -52,6 +55,9 @@ const SignInLinks = (props) => {
                 </li>
                 <li>
                     <NavLink to={'/create'}>הודעה חדשה</NavLink>
+                </li>
+                <li>
+                    <NavLink to={'/'}>הודעות</NavLink>
                 </li>
 
                 {isAdmin ? <li>
